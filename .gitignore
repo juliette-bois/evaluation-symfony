@@ -4,3 +4,6 @@ manifest/tmp/
 symphony/
 workspace/uploads/
 install-log.txt
+
+.idea
+.DS_Store
