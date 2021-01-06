@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Article;
-use Doctrine\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Form\ArticleType;
 
 class CreateArticleController extends AbstractController
 {
@@ -23,17 +24,13 @@ class CreateArticleController extends AbstractController
      * @param ObjectManager $manager
      * @return Response
      */
-    public function index(Request $request, ObjectManager $manager, Article $article = null): Response
+    public function index(Request $request, EntityManagerInterface $manager, Article $article = null): Response
     {
         if (!$article) {
             $article = new Article();
         }
 
-        $form = $this->createFormBuilder($article)
-                    ->add('title')
-                    ->add('content')
-                    ->add('image')
-                    ->getForm();
+        $form = $this->createForm(ArticleType::class, $article);
 
         $form->handleRequest($request);
 
