@@ -5,12 +5,12 @@
 {% block body %}
 
 <div class="container mx-auto px-4">
-    <h1 class="text-center text-xl font-bold mb-4">Créer un article</h1>
+    <h1 class="text-center text-xl font-bold mb-4">{% if editMode %} Créer un article {% else %} Modifier l'article {% endif %}</h1>
     {{ form_start(form_article) }}
     {{ form_raw(form_article.title, {'attr': {'placeholder': 'Titre de l\'article'}}) }}
     {{ form_raw(form_article.content), {'attr': {'placeholder': 'Contenu de l\'article'}}) }}
     {{ form_raw(form_article.image), {'attr': {'placeholder': 'Titre de l\'article'}}) }}
-    <button type="submit">Enregistrer</button>
+    <button type="submit">{% if editMode %} Enregistrer {% else %} Modifier {% endif %}</button>
     {{ form_end(form_article) }}
 </div>
 

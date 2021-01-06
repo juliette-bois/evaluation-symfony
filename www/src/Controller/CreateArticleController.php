@@ -17,13 +17,18 @@ class CreateArticleController extends AbstractController
 {
     /**
      * @Route("/new/article", name="new_article")
+     * @Route("/article/{id}/edit", name="edit_article")
+     * @param Article|null $article
      * @param Request $request
      * @param ObjectManager $manager
      * @return Response
      */
-    public function index(Request $request, ObjectManager $manager): Response
+    public function index(Request $request, ObjectManager $manager, Article $article = null): Response
     {
-        $article = new Article();
+        if (!$article) {
+            $article = new Article();
+        }
+
         $form = $this->createFormBuilder($article)
                     ->add('title')
                     ->add('content')
@@ -33,7 +38,9 @@ class CreateArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $article->setCreatedAt(new \DateTime());
+            if (!$article->getId()) {
+                $article->setCreatedAt(new \DateTime());
+            }
 
             $manager->persist($article);
             $manager->flush();
@@ -42,7 +49,8 @@ class CreateArticleController extends AbstractController
         }
 
         return $this->render('create_article/index.html.twig', [
-            'form_article' => $form->createView()
+            'form_article' => $form->createView(),
+            'edit_mode' => $article->getId() !== null
         ]);
     }
 }
