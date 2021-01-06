@@ -26,7 +26,7 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/article/{id}", name="blog_show")
+     * @Route("/article/{id}", name="article_show")
      * @param Article $article
      * @return Response
      */
