@@ -7,14 +7,14 @@
 {% block body %}
 
 <div class="container mx-auto px-4">
-    <h1 class="text-xl font-bold mb-4">{% if edit_mode %} Créer un article {% else %} Modifier l'article {% endif %}</h1>
+    <h1 class="text-xl font-bold mb-4">{% if edit_mode %} Modifier un article {% else %} Créer l'article {% endif %}</h1>
     {{ form_start(form_article) }}
 
     {{ form_row(form_article.title, {'attr': {'placeholder': 'Titre de l\'article'}}) }}
     {{ form_row(form_article.content, {'attr': {'placeholder': 'Contenu de l\'article'}}) }}
-    {{ form_row(form_article.image, {'attr': {'placeholder': 'Titre de l\'article'}}) }}
+    {{ form_row(form_article.image, {'attr': {'placeholder': 'Image de l\'article'}}) }}
 
-    <button type="submit" class="px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 mt-4">{% if edit_mode %} Enregistrer {% else %} Modifier {% endif %}</button>
+    <button type="submit" class="px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 mt-4">{% if edit_mode %} Modifier {% else %} Enregistrer {% endif %}</button>
 
     {{ form_end(form_article) }}
 </div>

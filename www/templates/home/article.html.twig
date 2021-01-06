@@ -13,6 +13,7 @@
                 <img class="my-4" src="{{ article.image}}" alt="{{ article.title }}">
                 <p>{{ article.content | raw }}</p>
             </article>
+            <a class="px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 mt-4 ml-auto inline-block" href="{{ path("edit_article", {'id': article.id})}}">Modifier l'article</a>
         </section>
     </div>
 

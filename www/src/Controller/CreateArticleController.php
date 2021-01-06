@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Form\ArticleType;
+use Symfony\Component\Routing\Annotation\Route;
 
 class CreateArticleController extends AbstractController
 {
