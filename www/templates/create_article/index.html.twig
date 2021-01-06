@@ -1,11 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CreateArticleController!{% endblock %}
+{% block title %}Blog | Créer un article{% endblock %}
 
 {% block body %}
 
 <div class="container mx-auto px-4">
-
+    <h1 class="text-center text-xl font-bold mb-4">Créer un article</h1>
+    {{ form_start(form_article) }}
+    {{ form_raw(form_article.title, {'attr': {'placeholder': 'Titre de l\'article'}}) }}
+    {{ form_raw(form_article.content), {'attr': {'placeholder': 'Contenu de l\'article'}}) }}
+    {{ form_raw(form_article.image), {'attr': {'placeholder': 'Titre de l\'article'}}) }}
+    <button type="submit">Enregistrer</button>
+    {{ form_end(form_article) }}
 </div>
 
 {% endblock %}

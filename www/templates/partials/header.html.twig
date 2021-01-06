@@ -1,9 +1,9 @@
 <header class="py-8">
     <div class="container mx-auto px-4 flex justify-between items-center">
-        <a href="/">Mon blog</a>
+        <a href="{{ path("home") }}">Mon blog</a>
         <nav class="flex items-center">
-            <a href="/articles">Articles</a>
-            <a class="ml-4" href="/create/article">Créer un article</a>
+            <a href="{{ path("articles") }}">Articles</a>
+            <a class="ml-4" href="{{ path("new_article") }}">Créer un article</a>
             <a class="px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 ml-4" href="/login">Se connecter</a>
         </nav>
     </div>
