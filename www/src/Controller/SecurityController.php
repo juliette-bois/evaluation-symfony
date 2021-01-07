@@ -16,7 +16,7 @@ class SecurityController extends AbstractController
     /**
      * @Route("/registration", name="security_registration")
      * @param Request $request
-     * @param ObjectManager $manager
+     * @param EntityManagerInterface $manager
      * @param UserPasswordEncoderInterface $encoder
      * @return Response
      */
