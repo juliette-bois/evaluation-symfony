@@ -5,9 +5,14 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @UniqueEntity(
+ *     fields={"email"},
+ *     message="L'email saisie est déjà utilisé pour un compte"
+ * )
  */
 class User implements \Symfony\Component\Security\Core\User\UserInterface
 {
@@ -20,13 +25,14 @@ class User implements \Symfony\Component\Security\Core\User\UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Email()
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $usersame;
+    private $username;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -59,14 +65,14 @@ class User implements \Symfony\Component\Security\Core\User\UserInterface
         return $this;
     }
 
-    public function getUsersame(): ?string
+    public function getUsername(): ?string
     {
-        return $this->usersame;
+        return $this->username;
     }
 
-    public function setUsersame(string $usersame): self
+    public function setUsername(string $username): self
     {
-        $this->usersame = $usersame;
+        $this->username = $username;
 
         return $this;
     }
@@ -91,11 +97,6 @@ class User implements \Symfony\Component\Security\Core\User\UserInterface
     public function getSalt(): ?string
     {
         // TODO: Implement getSalt() method.
-    }
-
-    public function getUsername(): string
-    {
-        // TODO: Implement getUsername() method.
     }
 
     public function eraseCredentials()
