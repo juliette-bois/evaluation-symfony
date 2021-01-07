@@ -38,7 +38,7 @@ class User implements \Symfony\Component\Security\Core\User\UserInterface
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(
      *      min = 8,
-     *      minMessage = "Votre mot de passe doit comporter au moins {{limit}} caractères",
+     *      minMessage = "Votre mot de passe doit comporter au moins 8 caractères",
      * )
      */
     private $password;
@@ -89,12 +89,12 @@ class User implements \Symfony\Component\Security\Core\User\UserInterface
         return $this;
     }
 
-    public function getRoles(): array
+    public function getRoles()
     {
         return ['ROLE_USER'];
     }
 
-    public function getSalt(): ?string
+    public function getSalt()
     {
         // TODO: Implement getSalt() method.
     }
