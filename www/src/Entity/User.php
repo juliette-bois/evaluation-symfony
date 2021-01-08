@@ -10,7 +10,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(
- *     fields={"email"},
+ *     fields={"email", "username"},
  *     message="L'email saisie est déjà utilisé pour un compte"
  * )
  */

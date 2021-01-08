@@ -18,18 +18,18 @@
         <section class="py-12">
             <h2 class="text-lg font-bold">{{ article.comments | length }} commentaires</h2>
             {% for comment in article.comments %}
-            <div class="py-8">
-                <p class="text-gray-500 text-sm">Par {{ comment.author }}, le {{ comment.createdAt | date('d/m/y') }} à {{ comment.createdAt | date('H:i') }}</p>
-                <p>{{ comment.content | raw }}</p>
-            </div>
+              <div class="py-8">
+                  <p class="text-gray-500 text-sm">Par {{ comment.author }}, le {{ comment.createdAt | date('d/m/y') }} à {{ comment.createdAt | date('H:i') }}</p>
+                  <p>{{ comment.content | raw }}</p>
+              </div>
             {% endfor %}
 
             {% if app.user %}
-            {{ form_start(form_comment) }}
-            {{ form_row(form_comment.author, {'attr': {'placeholder': 'Votre nom'}}) }}
-            {{ form_row(form_comment.content, {'attr': {'placeholder': 'Votre commentaire'}}) }}
-            <button type="submit" class="px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 mt-4">Commenter</button>
-            {{ form_end(form_comment) }}
+              {{ form_start(form_comment) }}
+              {{ form_row(form_comment.author, {'attr': {'placeholder': 'Votre nom'}}) }}
+              {{ form_row(form_comment.content, {'attr': {'placeholder': 'Votre commentaire'}}) }}
+              <button type="submit" class="px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 mt-4">Commenter</button>
+              {{ form_end(form_comment) }}
             {% else %}
                 <h2 class="text-lg font-bold"><a class="text-indigo-600" href="{{ path('security_login') }}">Connectez-vous </a>si vous souhaitez poster un commentaire !</h2>
             {% endif %}

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Entity\Comment;
+use App\Entity\User;
 use App\Form\CommentType;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -55,5 +56,22 @@ class HomeController extends AbstractController
             'article' => $article,
             'form_comment' => $form_comment->createView(),
         ]);
+    }
+
+  /**
+   * @Route("/articles", name="articles")
+   * @param ArticleRepository $repo
+   * @param User|null $user
+   * @return Response
+   */
+    public function showArticles(ArticleRepository  $repo, User $user = null): Response
+    {
+      //dd($user);
+      $articles = $repo->findAll();
+      //dd($articles);
+
+      return $this->render('home/articles.html.twig', [
+        'articles' => $articles
+      ]);
     }
 }
