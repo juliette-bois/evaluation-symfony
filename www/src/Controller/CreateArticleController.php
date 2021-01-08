@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,14 +13,15 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CreateArticleController extends AbstractController
 {
-    /**
-     * @Route("/new/article", name="new_article")
-     * @Route("/article/{id}/edit", name="edit_article")
-     * @param Request $request
-     * @param EntityManagerInterface $manager
-     * @param Article|null $article
-     * @return Response
-     */
+  /**
+   * @Route("/new/article", name="new_article")
+   * @Route("/article/{id}/edit", name="edit_article")
+   * @param Request $request
+   * @param EntityManagerInterface $manager
+   * @param Article|null $article
+   * @param User $user
+   * @return Response
+   */
     public function index(Request $request, EntityManagerInterface $manager, Article $article = null): Response
     {
         if (!$article) {

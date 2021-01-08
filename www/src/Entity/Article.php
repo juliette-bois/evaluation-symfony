@@ -25,8 +25,8 @@ class Article
      * @Assert\Length(
      *      min = 2,
      *      max = 255,
-     *      minMessage = "Votre titre doit comporter au moins {{limit}} caractères",
-     *      maxMessage = "Votre titre ne peut pas comporter plus de {{limit}} caractères"
+     *      minMessage = "Votre titre doit comporter au moins 2 caractères",
+     *      maxMessage = "Votre titre ne peut pas comporter plus de 255 caractères"
      * )
      */
     private $title;

@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Blog{% endblock %}
+
+{% block body %}
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-center text-xl font-bold mb-4">Se connecter</h1>
+        <p class="text-center text-gray-500	w-96 m-auto">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <section class="py-12">
+            <form action="{{ path('security_login') }}" method="post">
+                <fieldset>
+                    <label>
+                        Adresse email
+                        <input type="text" placeholder="Adresse email" required name="_username">
+                    </label>
+                </fieldset>
+                <fieldset>
+                    <label>
+                        Mot de passe
+                        <input type="password" placeholder="Mot de passe" required name="_password">
+                    </label>
+                </fieldset>
+                <button type="submit" class="px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 mt-4">Je me connecte</button>
+            </form>
+            <p>Vous n'avez pas de compte ? <a class="text-indigo-600" href="{{ path('security_registration') }}">Se créer un compte</a></p>
+        </section>
+    </div>
+{% endblock %}
