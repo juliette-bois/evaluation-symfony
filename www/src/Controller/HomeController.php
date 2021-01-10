@@ -43,10 +43,10 @@ class HomeController extends AbstractController
         $form_comment = $this->createForm(CommentType::class, $comment);
         $form_comment->handleRequest($request);
         if ($form_comment->isSubmitted() && $form_comment->isValid()) {
-            $comment->setCreatedAt(new \DateTime());
-            $comment->setArticle($article);
+            $comment->setCreatedAt(new \DateTime())
+                    ->setArticle($article);
 
-            $manager->persist($form_comment);
+            $manager->persist($comment);
             $manager->flush();
 
             return $this->redirectToRoute('article_show', ['id' => $article->getId()]);
