@@ -14,6 +14,9 @@
                 <p>{{ article.content | raw }}</p>
             </article>
             <a class="px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 mt-4 ml-auto inline-block" href="{{ path("edit_article", {'id': article.id})}}">Modifier l'article</a>
+            {% if app.user %}
+              <a class="px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 mt-4 ml-auto inline-block" href="{{ path("article_delete", {'id': article.id})}}">Supprimer l'article</a>
+            {% endif %}
         </section>
         <section class="py-12">
             <h2 class="text-lg font-bold">{{ article.comments | length }} {% if article.comments | length is same as 0 %}commentaire {% else %} commentaires{% endif %}</h2>

@@ -6,6 +6,7 @@
 
   <div class="container mx-auto px-4 py-8">
     <h1 class="text-center text-xl font-bold mb-4">Mes articles</h1>
+    {% if articles %}
     <section class="px-12 pb-12">
       {% for article in articles %}
         <article class="bg-gray-100 p-8 rounded-xl mt-8">
@@ -17,6 +18,22 @@
         </article>
       {% endfor %}
     </section>
+    {% else %}
+      <h2 class="text-lg font-bold mb-20">Vous n'avez pas d'article. <a class="text-indigo-600" href="{{ path("new_article") }}">Créer un article !</a></h2>
+    {% endif %}
+    <span class="block w-full bg-gray-300 h-0.5"></span>
+    <h2 class="text-center text-xl font-bold mb-4 mt-8">Mes commentaires</h2>
+    {% if comments %}
+      {% for comment in comments %}
+        <div class="py-8">
+          <p class="text-gray-500 text-sm">Par {{ comment.author }}, le {{ comment.createdAt | date('d/m/y') }} à {{ comment.createdAt | date('H:i') }}</p>
+          <p>{{ comment.content | raw }}</p>
+        </div>
+        <span class="block w-full bg-gray-300 h-0.5"></span>
+      {% endfor %}
+    {% else %}
+      <h2 class="text-lg font-bold">Vous n'avez pas écrit de commentaire...</h2>
+    {% endif %}
   </div>
 
 {% endblock %}
