@@ -6,11 +6,13 @@ use App\Entity\Article;
 use App\Entity\Comment;
 use App\Form\CommentType;
 use App\Repository\ArticleRepository;
+use App\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 class HomeController extends AbstractController
 {
@@ -59,17 +61,19 @@ class HomeController extends AbstractController
 
   /**
    * @Route("/articles", name="articles")
-   * @param ArticleRepository $repo
+   * @param ArticleRepository $articleRepo
+   * @param CommentRepository $commentRepo
+   * @param Security $security
    * @return Response
    */
-    public function showArticles(ArticleRepository  $repo): Response
+    public function showArticles(ArticleRepository  $articleRepo, CommentRepository $commentRepo, Security $security): Response
     {
-      //dd($user);
-      $articles = $repo->findAll();
-      //dd($articles);
+      $articles = $articleRepo->findBy(["createdBy" => $security->getUser()->getUsername()]);
+      $comments = $commentRepo->findBy(["author" => $security->getUser()->getUsername()]);
 
       return $this->render('home/articles.html.twig', [
-        'articles' => $articles
+        'articles' => $articles,
+        'comments' => $comments
       ]);
     }
 }
