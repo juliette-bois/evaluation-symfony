@@ -49,4 +49,19 @@ class CreateArticleController extends AbstractController
             'edit_mode' => $article->getId() !== null
         ]);
     }
+
+    /**
+     * @Route("/delete/article/{id}", name="article_delete")
+     * @param Article $article
+     * @param Request $request
+     * @return Response
+     */
+    public function deleteArticle(Article $article, Request $request): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($article);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('home');
+    }
 }
