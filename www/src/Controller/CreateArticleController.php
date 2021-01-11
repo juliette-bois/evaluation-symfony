@@ -3,13 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Article;
-use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Form\ArticleType;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 class CreateArticleController extends AbstractController
 {
@@ -18,11 +18,11 @@ class CreateArticleController extends AbstractController
    * @Route("/article/{id}/edit", name="edit_article")
    * @param Request $request
    * @param EntityManagerInterface $manager
+   * @param Security $security
    * @param Article|null $article
-   * @param User $user
    * @return Response
    */
-    public function index(Request $request, EntityManagerInterface $manager, Article $article = null): Response
+    public function index(Request $request, EntityManagerInterface $manager, Security $security, Article $article = null): Response
     {
         if (!$article) {
             $article = new Article();
@@ -35,6 +35,7 @@ class CreateArticleController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             if (!$article->getId()) {
                 $article->setCreatedAt(new \DateTime());
+                $article->setCreatedBy($security->getUser()->getUsername());
             }
 
             $manager->persist($article);
