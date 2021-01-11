@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Blog{% endblock %}
+
+{% block body %}
+
+    <div class="container mx-auto px-4 py-8">
+        <a href="{{ path("home") }}">Retour</a>
+        <section class="py-12">
+            <article class="bg-gray-100 p-8 rounded-xl">
+                <h2 class="text-lg font-bold">{{ article.title }}</h2>
+                <p class="text-gray-500 text-sm">Ecrit le {{ article.createdAt | date('d/m/y') }} à {{ article.createdAt | date('H:i') }} par {{ article.createdBy }}. - #{{ article.category.title }}</p>
+                <img class="my-4" src="{{ article.image}}" alt="{{ article.title }}">
+                <p>{{ article.content | raw }}</p>
+            </article>
+            <a class="px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 mt-4 ml-auto inline-block" href="{{ path("edit_article", {'id': article.id})}}">Modifier l'article</a>
+            {% if app.user %}
+              <a class="px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 mt-4 ml-auto inline-block" href="{{ path("article_delete", {'id': article.id})}}">Supprimer l'article</a>
+            {% endif %}
+        </section>
+        <section class="py-12">
+            <h2 class="text-lg font-bold">{{ article.comments | length }} {% if article.comments | length is same as 0 %}commentaire {% else %} commentaires{% endif %}</h2>
+            {% for comment in article.comments %}
+              <div class="py-8">
+                  <p class="text-gray-500 text-sm">Par {{ comment.author }}, le {{ comment.createdAt | date('d/m/y') }} à {{ comment.createdAt | date('H:i') }}</p>
+                  <p>{{ comment.content | raw }}</p>
+              </div>
+              <span class="block w-full bg-gray-300 h-0.5"></span>
+            {% endfor %}
+
+            <div class="py-8">
+                {% if app.user %}
+                    <h2 class="text-md font-bold mb-2">Poster un commentaire</h2>
+                    {{ form_start(form_comment) }}
+                    {{ form_row(form_comment.author, {'attr': {'placeholder': 'Votre nom'}}) }}
+                    {{ form_row(form_comment.content, {'label':'Votre message', 'attr': {'placeholder': 'Votre commentaire'}}) }}
+                    <button type="submit" class="px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 mt-4">Commenter</button>
+                    {{ form_end(form_comment) }}
+                {% else %}
+                    <h2 class="text-lg font-bold"><a class="text-indigo-600" href="{{ path('security_login') }}">Connectez-vous </a>si vous souhaitez poster un commentaire !</h2>
+                {% endif %}
+            </div>
+        </section>
+    </div>
+
+{% endblock %}
