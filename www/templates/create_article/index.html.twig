@@ -11,10 +11,10 @@
 		<h1 class="text-xl font-bold mb-4">{% if edit_mode %} Modifier un article {% else %} Créer l'article {% endif %}</h1>
 	    {{ form_start(form_article) }}
 
-	    {{ form_row(form_article.title, {'attr': {'placeholder': 'Titre de l\'article'}}) }}
-	    {{ form_row(form_article.category) }}
-	    {{ form_row(form_article.content, {'attr': {'placeholder': 'Contenu de l\'article'}}) }}
-	    {{ form_row(form_article.image, {'attr': {'placeholder': 'Image de l\'article'}}) }}
+	    {{ form_row(form_article.title, {'label':'Titre de l\'article', 'attr': {'placeholder': 'Titre de l\'article'}}) }}
+	    {{ form_row(form_article.category, {'label':'Catégorie de l\'article'}) }}
+	    {{ form_row(form_article.content, {'label':'Contenu de l\'article', 'attr': {'placeholder': 'Contenu de l\'article'}}) }}
+	    {{ form_row(form_article.image, {'label':'Image de l\'article', 'attr': {'placeholder': 'Image de l\'article'}}) }}
 
 	    <button type="submit" class="px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 mt-4">{% if edit_mode %} Modifier {% else %} Enregistrer {% endif %}</button>
 

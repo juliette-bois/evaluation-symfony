@@ -5,24 +5,24 @@
 {% block body %}
     <div class="container mx-auto px-4 py-8">
         <h1 class="text-center text-xl font-bold mb-4">Se connecter</h1>
-        <p class="text-center text-gray-500	w-96 m-auto">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <p class="text-center text-gray-500	w-96 m-auto">Content de vous revoir !</p>
         <section class="py-12">
             <form action="{{ path('security_login') }}" method="post">
-                <fieldset>
+                <div class="form-group">
                     <label>
                         Adresse email
                         <input type="text" placeholder="Adresse email" required name="_username">
                     </label>
-                </fieldset>
-                <fieldset>
+                </div>
+                <div class="form-group">
                     <label>
                         Mot de passe
                         <input type="password" placeholder="Mot de passe" required name="_password">
                     </label>
-                </fieldset>
-                <button type="submit" class="px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 mt-4">Je me connecte</button>
+                </div>
+                <button type="submit" class="text-center px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 mt-4 mb-8">Je me connecte</button>
             </form>
-            <p>Vous n'avez pas de compte ? <a class="text-indigo-600" href="{{ path('security_registration') }}">Se créer un compte</a></p>
+            <p class="text-center">Vous n'avez pas de compte ? <a class="text-indigo-600" href="{{ path('security_registration') }}">Se créer un compte</a></p>
         </section>
     </div>
 {% endblock %}
