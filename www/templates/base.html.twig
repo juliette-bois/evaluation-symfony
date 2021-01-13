@@ -5,6 +5,32 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
         {% block stylesheets %}{% endblock %}
+        <style>
+          form {
+            max-width: 600px;
+            margin: auto;
+          }
+
+          form .form-group {
+            margin-bottom: 15px;
+          }
+          form .form-group label {
+            display: block;
+          }
+          form .form-group input,
+          form .form-group textarea,
+          form .form-group select {
+            display: block;
+            border-radius: 4px;
+            color: #202124;
+            font-size: 16px;
+            margin: 1px 1px 0 1px;
+            padding: 8px 11px;
+            z-index: 1;
+            border: 1px solid lightgray;
+            width: 100%;
+          }
+        </style>
     </head>
     <body>
         {% include 'partials/header.html.twig' %}

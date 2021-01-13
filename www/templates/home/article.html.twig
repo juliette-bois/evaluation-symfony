@@ -30,10 +30,10 @@
 
             <div class="py-8">
                 {% if app.user %}
-                    <h2 class="text-md font-bold mb-2">Poster un commentaire</h2>
+                    <h2 class="text-md font-bold mb-2 text-center">Poster un commentaire</h2>
                     {{ form_start(form_comment) }}
-                    {{ form_row(form_comment.author, {'attr': {'placeholder': 'Votre nom'}}) }}
-                    {{ form_row(form_comment.content, {'label':'Votre message', 'attr': {'placeholder': 'Votre commentaire'}}) }}
+                    {{ form_row(form_comment.author, {'label':'Votre nom', 'attr': {'placeholder': 'Votre nom'}}) }}
+                    {{ form_row(form_comment.content, {'label':'Votre message', 'label':'Votre message', 'attr': {'placeholder': 'Votre commentaire'}}) }}
                     <button type="submit" class="px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 mt-4">Commenter</button>
                     {{ form_end(form_comment) }}
                 {% else %}
