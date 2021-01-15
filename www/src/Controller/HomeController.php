@@ -76,4 +76,19 @@ class HomeController extends AbstractController
         'comments' => $comments
       ]);
     }
+
+  /**
+   * @Route("/delete/comment/{id}", name="comment_delete")
+   * @param Comment $comment
+   * @param Request $request
+   * @return Response
+   */
+  public function deleteComment(Comment $comment, Request $request): Response
+  {
+    $entityManager = $this->getDoctrine()->getManager();
+    $entityManager->remove($comment);
+    $entityManager->flush();
+
+    return $this->redirectToRoute('home');
+  }
 }
