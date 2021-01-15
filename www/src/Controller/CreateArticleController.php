@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use App\Form\ArticleType;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
+use App\Service\FileUploader;
 
 class CreateArticleController extends AbstractController
 {
@@ -19,10 +20,11 @@ class CreateArticleController extends AbstractController
    * @param Request $request
    * @param EntityManagerInterface $manager
    * @param Security $security
+   * @param FileUploader $fileUploader
    * @param Article|null $article
    * @return Response
    */
-    public function index(Request $request, EntityManagerInterface $manager, Security $security, Article $article = null): Response
+    public function index(Request $request, EntityManagerInterface $manager, Security $security, FileUploader $fileUploader, Article $article = null): Response
     {
         if (!$article) {
             $article = new Article();
@@ -33,7 +35,13 @@ class CreateArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if (!$article->getId()) {
+          $imageFile = $form->get('image')->getData();
+          if ($imageFile) {
+            $imageFileName = $fileUploader->upload($imageFile);
+            $article->setImage($imageFileName);
+          }
+
+          if (!$article->getId()) {
                 $article->setCreatedAt(new \DateTime());
                 $article->setCreatedBy($security->getUser()->getUsername());
             }
