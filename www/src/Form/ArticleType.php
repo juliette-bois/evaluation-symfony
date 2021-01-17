@@ -6,8 +6,10 @@ use App\Entity\Article;
 use App\Entity\Category;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class ArticleType extends AbstractType
 {
@@ -20,7 +22,22 @@ class ArticleType extends AbstractType
                 'choice_label' => 'title'
             ])
             ->add('content')
-            ->add('image')
+            ->add('image', FileType::class, [
+              'label' => "Image de l'article",
+              'mapped' => false,
+              'required' => false,
+              'constraints' => [
+                new File([
+                  'maxSize' => '1024k',
+                  'mimeTypes' => [
+                    'image/png',
+                    'image/jpeg',
+                    'video/JPEG'
+                ],
+                  'mimeTypesMessage' => 'Please upload a valid PDF document',
+                ])
+              ],
+            ])
         ;
     }
 
