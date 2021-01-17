@@ -8,7 +8,7 @@
 
 <div class="container mx-auto px-4">
 	{% if app.user %}
-		<h1 class="text-center text-xl font-bold mb-4">{% if edit_mode %} Modifier un article {% else %} Créer l'article {% endif %}</h1>
+		<h1 class="text-center text-xl font-bold mb-4">{% if edit_mode %} {% trans %}Modifier un article{% endtrans %} {% else %} {% trans %}Créer l'article{% endtrans %} {% endif %}</h1>
 	    {{ form_start(form_article) }}
 
 	    {{ form_row(form_article.title, {'label':'Titre de l\'article', 'attr': {'placeholder': 'Titre de l\'article'}}) }}
@@ -16,7 +16,7 @@
 	    {{ form_row(form_article.content, {'label':'Contenu de l\'article', 'attr': {'placeholder': 'Contenu de l\'article'}}) }}
 	    {{ form_row(form_article.image, {'label':'Image de l\'article'}) }}
 
-	    <button type="submit" class="px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 mt-4">{% if edit_mode %} Modifier {% else %} Enregistrer {% endif %}</button>
+	    <button type="submit" class="px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 mt-4">{% if edit_mode %} {% trans %}Modifier{% endtrans %} {% else %} {% trans %}Enregistrer{% endtrans %} {% endif %}</button>
 
 	    {{ form_end(form_article) }}
 	{% endif %}

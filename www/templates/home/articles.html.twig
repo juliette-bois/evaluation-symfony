@@ -5,35 +5,35 @@
 {% block body %}
 
   <div class="container mx-auto px-4 py-8">
-    <h1 class="text-center text-xl font-bold mb-4">Mes articles</h1>
+    <h1 class="text-center text-xl font-bold mb-4">{% trans %}Mes articles{% endtrans %}</h1>
     {% if articles %}
     <section class="px-12 pb-12">
       {% for article in articles %}
         <article class="bg-gray-100 p-8 rounded-xl mt-8">
           <h2 class="text-lg font-bold">{{ article.title }}</h2>
-          <p class="text-gray-500 text-sm">Ecrit le {{ article.createdAt | date('d/m/y') }} à {{ article.createdAt | date('H:i') }} - #{{ article.category.title }}</p>
+          <p class="text-gray-500 text-sm">{% trans %}Ecrit le{% endtrans %} {{ article.createdAt | date('d/m/y') }} {% trans %}à{% endtrans %} {{ article.createdAt | date('H:i') }} - #{{ article.category.title }}</p>
           <img class="my-4" src="{{ asset('uploads/images/' ~ article.image) }}" alt="{{ article.title }}">
           <p>{{ article.content | raw }}</p>
-          <a class="px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 mt-4 ml-auto inline-block" href="{{ path("edit_article", {'id': article.id})}}">Modifier l'article</a>
+          <a class="px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 mt-4 ml-auto inline-block" href="{{ path("edit_article", {'id': article.id})}}">{% trans %}Modifier l'article{% endtrans %}</a>
         </article>
       {% endfor %}
     </section>
     {% else %}
-      <h2 class="text-lg font-bold mb-20">Vous n'avez pas d'article. <a class="text-indigo-600" href="{{ path("new_article") }}">Créer un article !</a></h2>
+      <h2 class="text-lg font-bold mb-20">{% trans %}Vous n'avez pas d'article. {% endtrans %}<a class="text-indigo-600" href="{{ path("new_article") }}">{% trans %}Créer un article !{% endtrans %}</a></h2>
     {% endif %}
     <span class="block w-full bg-gray-300 h-0.5"></span>
-    <h2 class="text-center text-xl font-bold mb-4 mt-8">Mes commentaires</h2>
+    <h2 class="text-center text-xl font-bold mb-4 mt-8">{% trans %}Mes commentaires{% endtrans %}</h2>
     {% if comments %}
       {% for comment in comments %}
         <div class="py-8">
-          <p class="text-gray-500 text-sm">Par {{ comment.author }}, le {{ comment.createdAt | date('d/m/y') }} à {{ comment.createdAt | date('H:i') }}</p>
+          <p class="text-gray-500 text-sm">{% trans %}Par{% endtrans %} {{ comment.author }}, {% trans %}le{% endtrans %} {{ comment.createdAt | date('d/m/y') }} {% trans %}à{% endtrans %} {{ comment.createdAt | date('H:i') }}</p>
           <p>{{ comment.content | raw }}</p>
         </div>
-        <a class="px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 mt-4 ml-auto inline-block" href="{{ path("comment_delete", {'id': comment.id})}}">Supprimer le commentaire</a>
+        <a class="px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 mt-4 ml-auto inline-block" href="{{ path("comment_delete", {'id': comment.id})}}">{% trans %}Supprimer le commentaire{% endtrans %}</a>
         <span class="block w-full bg-gray-300 h-0.5 mt-8"></span>
       {% endfor %}
     {% else %}
-      <h2 class="text-lg font-bold">Vous n'avez pas écrit de commentaire...</h2>
+      <h2 class="text-lg font-bold">{% trans %}Vous n'avez pas écrit de commentaire...{% endtrans %}</h2>
     {% endif %}
   </div>
 
