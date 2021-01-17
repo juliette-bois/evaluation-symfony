@@ -83,12 +83,16 @@ class HomeController extends AbstractController
    * @param Request $request
    * @return Response
    */
-  public function deleteComment(Comment $comment, Request $request): Response
-  {
-    $entityManager = $this->getDoctrine()->getManager();
-    $entityManager->remove($comment);
-    $entityManager->flush();
+    public function deleteComment(Comment $comment, Request $request): Response
+    {
+      $submittedToken = $request->request->get('token');
 
-    return $this->redirectToRoute('home');
-  }
+      if ($this->isCsrfTokenValid('comment_form', $submittedToken)) {
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($comment);
+        $entityManager->flush();
+      }
+
+      return $this->redirectToRoute('home');
+    }
 }

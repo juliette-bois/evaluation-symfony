@@ -20,7 +20,22 @@ class ArticleType extends AbstractType
                 'choice_label' => 'title'
             ])
             ->add('content')
-            ->add('image')
+            ->add('image', FileType::class, [
+              'label' => "Image de l'article",
+              'mapped' => false,
+              'required' => false,
+              'constraints' => [
+                new File([
+                  'maxSize' => '1024k',
+                  'mimeTypes' => [
+                    'image/png',
+                    'image/jpeg',
+                    'video/JPEG'
+                ],
+                  'mimeTypesMessage' => 'Merci de choisir un fichier .png ou .jpeg',
+                ])
+              ],
+            ])
         ;
     }
 
