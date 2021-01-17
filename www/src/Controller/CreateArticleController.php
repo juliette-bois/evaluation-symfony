@@ -58,9 +58,13 @@ class CreateArticleController extends AbstractController
      */
     public function deleteArticle(Article $article, Request $request): Response
     {
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->remove($article);
-        $entityManager->flush();
+        $submittedToken = $request->request->get('token');
+
+        if ($this->isCsrfTokenValid('article_form', $submittedToken)) {
+          $entityManager = $this->getDoctrine()->getManager();
+          $entityManager->remove($article);
+          $entityManager->flush();
+        }
 
         return $this->redirectToRoute('home');
     }
