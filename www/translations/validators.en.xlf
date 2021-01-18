@@ -521,27 +521,27 @@
         <source>Please enter a valid week.</source>
         <target>Please enter a valid week.</target>
       </trans-unit>
-      <trans-unit id="title.too.short">
+      <trans-unit id="1_I7K53" resname="title.too.short">
         <source>title.too.short</source>
         <target>Your title must be at least 2 characters long</target>
       </trans-unit>
-      <trans-unit id="title.too.long">
+      <trans-unit id="s5QEJX0" resname="title.too.long">
         <source>title.too.long</source>
         <target>Your title cannot be longer than 255 characters</target>
       </trans-unit>
-      <trans-unit id="message.too.short">
+      <trans-unit id="kw3X2qG" resname="message.too.short">
         <source>message.too.short</source>
         <target>Your content must be at least 10 characters long</target>
       </trans-unit>
-      <trans-unit id="password.too.short">
+      <trans-unit id="Bu6VIvl" resname="password.too.short">
         <source>password.too.short</source>
         <target>Your password must be at least 8 characters long</target>
       </trans-unit>
-      <trans-unit id="not.same.password">
+      <trans-unit id="8cMLaXf" resname="not.same.password">
         <source>not.same.password</source>
         <target>You did not enter the same password</target>
       </trans-unit>
-      <trans-unit id="email.already.use">
+      <trans-unit id="diWPBFv" resname="email.already.use">
         <source>email.already.use</source>
         <target>The email entered is already used for an account</target>
       </trans-unit>
