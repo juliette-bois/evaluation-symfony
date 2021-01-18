@@ -4,15 +4,21 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Entity\Comment;
+use App\Entity\User;
 use App\Form\CommentType;
 use App\Repository\ArticleRepository;
 use App\Repository\CommentRepository;
+use App\Service\SendEmail;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 
 class HomeController extends AbstractController
 {
@@ -31,14 +37,16 @@ class HomeController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/article/{id}", name="article_show")
-     * @param Article $article
-     * @param Request $request
-     * @param EntityManagerInterface $manager
-     * @return Response
-     */
-    public function showArticle(Article $article, Request $request, EntityManagerInterface $manager): Response
+  /**
+   * @Route("/article/{id}", name="article_show")
+   * @param User $user
+   * @param Article $article
+   * @param Request $request
+   * @param EntityManagerInterface $manager
+   * @param SendEmail $mailer
+   * @return Response
+   */
+    public function showArticle(Article $article, Request $request, EntityManagerInterface $manager, SendEmail $mailer): Response
     {
         $comment = new Comment();
         $form_comment = $this->createForm(CommentType::class, $comment);
@@ -46,6 +54,10 @@ class HomeController extends AbstractController
         if ($form_comment->isSubmitted() && $form_comment->isValid()) {
             $comment->setCreatedAt(new \DateTime())
                     ->setArticle($article);
+
+            $mailer->sendConfirmMessage($comment, $article);
+
+
 
             $manager->persist($comment);
             $manager->flush();
@@ -101,19 +113,9 @@ class HomeController extends AbstractController
    */
     public function updateComment(Comment $comment, Request $request, EntityManagerInterface $manager): Response
     {
-      if (!$comment) {
-        $comment = new Article();
-      }
-
       $form_comment = $this->createForm(CommentType::class, $comment);
       $form_comment->handleRequest($request);
       if ($form_comment->isSubmitted() && $form_comment->isValid()) {
-        if (!$comment->getId()) {
-          $comment->setCreatedAt(new \DateTime())
-            ->setArticle($comment);
-          //$article->setCreatedBy($security->getUser()->getUsername());
-        }
-
         $manager->persist($comment);
         $manager->flush();
 
