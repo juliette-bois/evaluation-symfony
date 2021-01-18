@@ -521,6 +521,30 @@
         <source>Please enter a valid week.</source>
         <target>Veuillez entrer une semaine valide.</target>
       </trans-unit>
+      <trans-unit id="title.too.short">
+        <source>title.too.short</source>
+        <target>Votre titre doit comporter au moins 2 caractères</target>
+      </trans-unit>
+      <trans-unit id="title.too.long">
+        <source>title.too.long</source>
+        <target>Votre titre ne peut pas comporter plus de 255 caractères</target>
+      </trans-unit>
+      <trans-unit id="message.too.short">
+        <source>message.too.short</source>
+        <target>Votre contenu doit comporter au moins 10 caractères</target>
+      </trans-unit>
+      <trans-unit id="password.too.short">
+        <source>password.too.short</source>
+        <target>Votre mot de passe doit comporter au moins 8 caractères</target>
+      </trans-unit>
+      <trans-unit id="not.same.password">
+        <source>not.same.password</source>
+        <target>Vous n'avez pas saisie le même mot de passe</target>
+      </trans-unit>
+      <trans-unit id="email.already.use">
+        <source>email.already.use</source>
+        <target>L'email saisie est déjà utilisée pour un compte</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

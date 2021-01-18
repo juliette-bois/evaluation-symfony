@@ -25,8 +25,8 @@ class Article
      * @Assert\Length(
      *      min = 2,
      *      max = 255,
-     *      minMessage = "Votre titre doit comporter au moins 2 caractères",
-     *      maxMessage = "Votre titre ne peut pas comporter plus de 255 caractères"
+     *      minMessage = "title.too.short",
+     *      maxMessage = "title.too.long"
      * )
      */
     private $title;
@@ -35,7 +35,7 @@ class Article
      * @ORM\Column(type="text")
      * @Assert\Length(
      *      min = 10,
-     *      minMessage = "Votre contenu doit comporter au moins {{limit}} caractères",
+     *      minMessage = "message.too.short",
      * )
      */
     private $content;
