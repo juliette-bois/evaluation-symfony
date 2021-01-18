@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Entity\Comment;
-use App\Entity\User;
 use App\Form\CommentType;
 use App\Repository\ArticleRepository;
 use App\Repository\CommentRepository;
@@ -13,12 +12,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
-use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 
 class HomeController extends AbstractController
 {
@@ -39,7 +34,6 @@ class HomeController extends AbstractController
 
   /**
    * @Route("/article/{id}", name="article_show")
-   * @param User $user
    * @param Article $article
    * @param Request $request
    * @param EntityManagerInterface $manager

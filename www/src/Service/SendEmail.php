@@ -4,7 +4,6 @@ namespace App\Service;
 
 use App\Entity\Article;
 use App\Entity\Comment;
-use App\Entity\User;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
