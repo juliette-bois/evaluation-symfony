@@ -34,7 +34,7 @@ class ArticleType extends AbstractType
                     'image/jpeg',
                     'video/JPEG'
                 ],
-                  'mimeTypesMessage' => 'Please upload a valid PDF document',
+                  'mimeTypesMessage' => 'Merci de choisir un fichier .png ou .jpeg',
                 ])
               ],
             ])

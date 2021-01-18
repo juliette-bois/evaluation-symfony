@@ -7,6 +7,7 @@ use App\Entity\Comment;
 use App\Form\CommentType;
 use App\Repository\ArticleRepository;
 use App\Repository\CommentRepository;
+use App\Service\SendEmail;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,14 +32,15 @@ class HomeController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/article/{id}", name="article_show")
-     * @param Article $article
-     * @param Request $request
-     * @param EntityManagerInterface $manager
-     * @return Response
-     */
-    public function showArticle(Article $article, Request $request, EntityManagerInterface $manager): Response
+  /**
+   * @Route("/article/{id}", name="article_show")
+   * @param Article $article
+   * @param Request $request
+   * @param EntityManagerInterface $manager
+   * @param SendEmail $mailer
+   * @return Response
+   */
+    public function showArticle(Article $article, Request $request, EntityManagerInterface $manager, SendEmail $mailer): Response
     {
         $comment = new Comment();
         $form_comment = $this->createForm(CommentType::class, $comment);
@@ -46,6 +48,10 @@ class HomeController extends AbstractController
         if ($form_comment->isSubmitted() && $form_comment->isValid()) {
             $comment->setCreatedAt(new \DateTime())
                     ->setArticle($article);
+
+            $mailer->sendConfirmMessage($comment, $article);
+
+
 
             $manager->persist($comment);
             $manager->flush();
@@ -75,6 +81,44 @@ class HomeController extends AbstractController
       return $this->render('home/articles.html.twig', [
         'articles' => $articles,
         'comments' => $comments
+      ]);
+    }
+
+  /**
+   * @Route("/delete/comment/{id}", name="comment_delete")
+   * @param Comment $comment
+   * @param Request $request
+   * @return Response
+   */
+    public function deleteComment(Comment $comment, Request $request): Response
+    {
+      $entityManager = $this->getDoctrine()->getManager();
+      $entityManager->remove($comment);
+      $entityManager->flush();
+
+      return $this->redirectToRoute('articles');
+    }
+
+  /**
+   * @Route("/update/comment/{id}", name="comment_update")
+   * @param Comment $comment
+   * @param Request $request
+   * @param EntityManagerInterface $manager
+   * @return Response
+   */
+    public function updateComment(Comment $comment, Request $request, EntityManagerInterface $manager): Response
+    {
+      $form_comment = $this->createForm(CommentType::class, $comment);
+      $form_comment->handleRequest($request);
+      if ($form_comment->isSubmitted() && $form_comment->isValid()) {
+        $manager->persist($comment);
+        $manager->flush();
+
+        return $this->redirectToRoute('articles');
+      }
+
+      return $this->render('home/comment.html.twig', [
+        'form_comment' => $form_comment->createView()
       ]);
     }
 }

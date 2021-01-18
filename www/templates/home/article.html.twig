@@ -41,7 +41,8 @@
                     <h2 class="text-md font-bold mb-2 text-center">{% trans %}Poster un commentaire{% endtrans %}</h2>
                     {{ form_start(form_comment) }}
                     {{ form_row(form_comment.author, {'label':'Votre nom'|trans, 'attr': {'placeholder': 'Votre nom'|trans}}) }}
-                    {{ form_row(form_comment.content, {'label':'Votre message'|trans, 'label':'Votre message'|trans, 'attr': {'placeholder': 'Votre commentaire'|trans}}) }}
+                    {{ form_row(form_comment.email, {'label':'Votre email'|trans, 'attr': {'placeholder': 'Votre email'|trans}}) }}
+                    {{ form_row(form_comment.content, {'label':'Votre message'|trans, 'label':'Votre message', 'attr': {'placeholder': 'Votre commentaire'|trans}}) }}
                     <button type="submit" class="px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 mt-4">{% trans %}Commenter{% endtrans %}</button>
                     {{ form_end(form_comment) }}
                 {% else %}

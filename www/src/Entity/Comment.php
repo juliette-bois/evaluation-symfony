@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CommentRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=CommentRepository::class)
@@ -23,7 +24,14 @@ class Comment
     private $author;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\Email()
+     */
+    private $email;
+
+    /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank
      */
     private $content;
 
@@ -53,6 +61,18 @@ class Comment
         $this->author = $author;
 
         return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+      return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+      $this->email = $email;
+
+      return $this;
     }
 
     public function getContent(): ?string
