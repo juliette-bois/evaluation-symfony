@@ -11,7 +11,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(
  *     fields={"email", "username"},
- *     message="L'email saisie est déjà utilisé pour un compte"
+ *     message="email.already.use"
  * )
  */
 class User implements \Symfony\Component\Security\Core\User\UserInterface
@@ -38,13 +38,13 @@ class User implements \Symfony\Component\Security\Core\User\UserInterface
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(
      *      min = 8,
-     *      minMessage = "Votre mot de passe doit comporter au moins 8 caractères",
+     *      minMessage = "password.too.short",
      * )
      */
     private $password;
 
     /**
-     * @Assert\EqualTo(propertyPath="password", message="Vous n'avez pas saisie le même mot de passe")
+     * @Assert\EqualTo(propertyPath="password", message="not.same.password")
      */
     public $confirm_password;
 

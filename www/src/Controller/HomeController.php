@@ -28,7 +28,7 @@ class HomeController extends AbstractController
 
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
-            'articles' => $articles,
+            'articles' => $articles
         ]);
     }
 
@@ -62,6 +62,7 @@ class HomeController extends AbstractController
         return $this->render('home/article.html.twig', [
             'article' => $article,
             'form_comment' => $form_comment->createView(),
+            'edit_mode' => $article->getId() !== null
         ]);
     }
 

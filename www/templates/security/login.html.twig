@@ -1,28 +1,30 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Blog{% endblock %}
+{% block title %}Blog | Se connecter{% endblock %}
 
 {% block body %}
-    <div class="container mx-auto px-4 py-8">
-        <h1 class="text-center text-xl font-bold mb-4">Se connecter</h1>
-        <p class="text-center text-gray-500	w-96 m-auto">Content de vous revoir !</p>
-        <section class="py-12">
-            <form action="{{ path('security_login') }}" method="post">
-                <div class="form-group">
-                    <label>
-                        Adresse email
-                        <input type="text" placeholder="Adresse email" required name="_username">
-                    </label>
-                </div>
-                <div class="form-group">
-                    <label>
-                        Mot de passe
-                        <input type="password" placeholder="Mot de passe" required name="_password">
-                    </label>
-                </div>
-                <button type="submit" class="text-center px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 mt-4 mb-8">Je me connecte</button>
-            </form>
-            <p class="text-center">Vous n'avez pas de compte ? <a class="text-indigo-600" href="{{ path('security_registration') }}">Se créer un compte</a></p>
-        </section>
-    </div>
+  <div class="container mx-auto px-4 py-8">
+    <h1 class="text-center text-xl font-bold mb-4">{% trans %}Se connecter{% endtrans %}</h1>
+    <p class="text-center text-gray-500	w-96 m-auto">{% trans %}Content de vous revoir !{% endtrans %}</p>
+    <section class="py-12">
+      <form method="post">
+        <input type="hidden" name="token" value="{{ csrf_token('login-form') }}"/>
+        <div class="form-group">
+          <label>
+            {% trans %}Adresse email{% endtrans %}
+            <input type="text" value="{{ last_username }}" placeholder="Adresse email" required autofocus name="_username">
+          </label>
+        </div>
+        <div class="form-group">
+          <label>
+            {% trans %}Mot de passe{% endtrans %}
+            <input type="password" placeholder="Mot de passe" required name="_password">
+          </label>
+        </div>
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+        <button type="submit" class="text-center px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 mt-4 mb-8">{% trans %}Je me connecte{% endtrans %}</button>
+      </form>
+      <p class="text-center">{% trans %}Vous n'avez pas de compte ? {% endtrans %} <a class="text-indigo-600" href="{{ path('security_registration') }}">{% trans %}Se créer un compte{% endtrans %}</a></p>
+    </section>
+  </div>
 {% endblock %}
