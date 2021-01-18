@@ -85,14 +85,43 @@ class HomeController extends AbstractController
    */
     public function deleteComment(Comment $comment, Request $request): Response
     {
-      $submittedToken = $request->request->get('token');
+      $entityManager = $this->getDoctrine()->getManager();
+      $entityManager->remove($comment);
+      $entityManager->flush();
 
-      if ($this->isCsrfTokenValid('comment_form', $submittedToken)) {
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->remove($comment);
-        $entityManager->flush();
+      return $this->redirectToRoute('articles');
+    }
+
+  /**
+   * @Route("/update/comment/{id}", name="comment_update")
+   * @param Comment $comment
+   * @param Request $request
+   * @param EntityManagerInterface $manager
+   * @return Response
+   */
+    public function updateComment(Comment $comment, Request $request, EntityManagerInterface $manager): Response
+    {
+      if (!$comment) {
+        $comment = new Article();
       }
 
-      return $this->redirectToRoute('home');
+      $form_comment = $this->createForm(CommentType::class, $comment);
+      $form_comment->handleRequest($request);
+      if ($form_comment->isSubmitted() && $form_comment->isValid()) {
+        if (!$comment->getId()) {
+          $comment->setCreatedAt(new \DateTime())
+            ->setArticle($comment);
+          //$article->setCreatedBy($security->getUser()->getUsername());
+        }
+
+        $manager->persist($comment);
+        $manager->flush();
+
+        return $this->redirectToRoute('articles');
+      }
+
+      return $this->render('home/comment.html.twig', [
+        'form_comment' => $form_comment->createView()
+      ]);
     }
 }
