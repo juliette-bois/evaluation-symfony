@@ -54,6 +54,11 @@ class User implements \Symfony\Component\Security\Core\User\UserInterface
     private $isAdmin;
 
     /**
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
+
+    /**
      * @return mixed
      */
     public function getIsAdmin()
@@ -110,9 +115,17 @@ class User implements \Symfony\Component\Security\Core\User\UserInterface
         return $this;
     }
 
-    public function getRoles()
+    public function getRoles(): array
     {
-        return ['ROLE_USER'];
+        $roles = $this->roles;
+
+        $roles[] = 'ROLE_USER';
+
+        if ($this->isAdmin) {
+            $roles[] = 'ROLE_ADMIN';
+        }
+
+        return array_unique($roles);
     }
 
     public function getSalt()

@@ -28,6 +28,10 @@ class CategoryController extends AbstractController
      */
     public function index(Request $request, EntityManagerInterface $manager, Security $security, FileUploader $fileUploader, Category $category = null): Response
     {
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('home');
+        }
+
         if (!$category) {
             $category = new Category();
         }
@@ -61,6 +65,10 @@ class CategoryController extends AbstractController
      */
     public function showCategories(CategoryRepository  $categoryRepo): Response
     {
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('home');
+        }
+
         $categories = $categoryRepo->findAll();
 
         return $this->render('category/index.html.twig', [
@@ -77,6 +85,10 @@ class CategoryController extends AbstractController
    */
     public function deleteCategory(CategoryRepository $categoryRepository, Request $request): Response
     {
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            throw $this->createAccessDeniedException('Access Denied.');
+        }
+
         $values = json_decode($request->getContent(), true);
         $category = $categoryRepository->find($values['id']);
         $entityManager = $this->getDoctrine()->getManager();

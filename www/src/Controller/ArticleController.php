@@ -16,6 +16,7 @@ use App\Service\FileUploader;
 
 class ArticleController extends AbstractController
 {
+
     /**
      * @Route("/new/article", name="new_article")
      * @Route("/article/{id}/edit", name="edit_article")
@@ -28,8 +29,16 @@ class ArticleController extends AbstractController
      */
     public function index(Request $request, EntityManagerInterface $manager, Security $security, FileUploader $fileUploader, Article $article = null): Response
     {
+        if (!$this->isGranted('IS_AUTHENTICATED_FULLY')) {
+            return $this->redirectToRoute('login');
+        }
+
         if (!$article) {
             $article = new Article();
+        } else {
+            if ((!$security->getUser() || $security->getUser()->getUsername() !== $article->getCreatedBy()) && !$this->isGranted('ROLE_ADMIN')) {
+                return $this->redirectToRoute('home');
+            }
         }
 
         $submittedToken = $request->request->get('article')['_token'];
@@ -77,6 +86,10 @@ class ArticleController extends AbstractController
      */
     public function showArticles(ArticleRepository  $articleRepo, CommentRepository $commentRepo, Security $security): Response
     {
+        if ($this->isGranted('IS_AUTHENTICATED_FULLY')) {
+            return $this->redirectToRoute('home');
+        }
+
         $articles = $articleRepo->findBy(["createdBy" => $security->getUser()->getUsername()]);
         $comments = $commentRepo->findBy(["author" => $security->getUser()->getUsername()]);
 
@@ -90,10 +103,15 @@ class ArticleController extends AbstractController
     /**
      * @Route("/delete/article/{id}", name="delete_article")
      * @param Article $article
+     * @param Security $security
      * @return Response
      */
-    public function deleteArticle(Article $article): Response
+    public function deleteArticle(Article $article, Security $security): Response
     {
+        if ((!$security->getUser() || $security->getUser()->getUsername() !== $article->getCreatedBy()) && !$this->isGranted('ROLE_ADMIN')) {
+            throw $this->createAccessDeniedException('Access Denied.');
+        }
+
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($article);
         $entityManager->flush();

@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 class CommentController extends AbstractController
 {
@@ -21,6 +22,10 @@ class CommentController extends AbstractController
    */
     public function showComments(CommentRepository  $commentRepo): Response
     {
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('home');
+        }
+
         $comments = $commentRepo->findAll();
 
         return $this->render('comment/index.html.twig', [
@@ -34,10 +39,15 @@ class CommentController extends AbstractController
      * @param Comment $comment
      * @param Request $request
      * @param EntityManagerInterface $manager
+     * @param Security $security
      * @return Response
      */
-    public function updateComment(Comment $comment, Request $request, EntityManagerInterface $manager): Response
+    public function updateComment(Comment $comment, Request $request, EntityManagerInterface $manager, Security $security): Response
     {
+        if ((!$security->getUser() || $security->getUser()->getUsername() !== $comment->getAuthor()) && !$this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('home');
+        }
+
         $submittedToken = $request->request->get('comment')['_token'];
 
         $form_comment = $this->createForm(CommentType::class, $comment);
@@ -63,10 +73,15 @@ class CommentController extends AbstractController
      * @Route("/delete/comment/{id}", name="delete_comment")
      * @param Comment $comment
      * @param Request $request
+     * @param Security $security
      * @return Response
      */
-    public function deleteComment(Comment $comment, Request $request): Response
+    public function deleteComment(Comment $comment, Request $request, Security $security): Response
     {
+        if ((!$security->getUser() || $security->getUser()->getUsername() !== $comment->getAuthor()) && !$this->isGranted('ROLE_ADMIN')) {
+            throw $this->createAccessDeniedException('Access Denied.');
+        }
+
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($comment);
         $entityManager->flush();
