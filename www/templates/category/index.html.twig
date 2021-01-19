@@ -13,10 +13,30 @@
           <h2 class="text-lg font-bold"># {{ category.id }} - {{ category.title }}</h2>
           <p>{{ category.description | raw }}</p>
           <a href="{{ path("edit_category", {'id': category.id}) }}" class="px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 mt-4 inline-block">{% trans %}Modifier la catégorie{% endtrans %}</a>
-          <a href="{{ path("delete_category", {'id': category.id}) }}" class="px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 mt-4 inline-block">{% trans %}Supprimer la catégorie{% endtrans %}</a>
+          <a id="delete_button" onclick="validate({{ category.id }})" class="px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 mt-4 inline-block">{% trans %}Supprimer la catégorie{% endtrans %}</a>
         </article>
       {% endfor %}
     </section>
   </div>
+
+  <script>
+    function validate(id) {
+      const translations = {
+        'warning_message': '{% trans %}Attention, vous êtes sur le point de supprimer tous les articles associés à cette catégorie. Êtes-vous sûr de bien vouloir supprimer cette catégorie ?{% endtrans %}'
+      }
+      if (confirm(translations.warning_message)) {
+        const route = "{{ path("delete_category") }}";
+        let httpRequest = new XMLHttpRequest();
+        httpRequest.open("post", route);
+        httpRequest.setRequestHeader(
+          "Content-Type",
+          "application/json",
+        );
+        httpRequest.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+        httpRequest.send(JSON.stringify({id: id}));
+        location.reload();
+      }
+    }
+  </script>
 
 {% endblock %}

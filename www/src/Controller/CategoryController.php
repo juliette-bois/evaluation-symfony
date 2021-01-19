@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Form\CategoryType;
+use App\Repository\ArticleRepository;
 use App\Repository\CategoryRepository;
 use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
@@ -64,17 +65,20 @@ class CategoryController extends AbstractController
     }
 
 
-    /**
-     * @Route("/delete/category/{id}", name="delete_category")
-     * @param Category $category
-     * @return Response
-     */
-    public function deleteCategory(Category $category): Response
+  /**
+   * @Route("/delete/category", name="delete_category")
+   * @param CategoryRepository $categoryRepository
+   * @param Request $request
+   * @return Response
+   */
+    public function deleteCategory(CategoryRepository $categoryRepository, Request $request): Response
     {
+        $values = json_decode($request->getContent(), true);
+        $category = $categoryRepository->find($values['id']);
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($category);
         $entityManager->flush();
 
-        return $this->redirectToRoute('home');
+        return new Response(true);
     }
 }

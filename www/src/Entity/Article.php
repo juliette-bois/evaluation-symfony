@@ -63,6 +63,7 @@ class Article
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="article", orphanRemoval=true)
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $comments;
 
