@@ -7,6 +7,7 @@
   <div class="container mx-auto px-4 py-8">
     <section class="py-12">
       {% if app.user %}
+        <a href="{{ path("show_articles") }}">{% trans %}Retour{% endtrans %}</a>
         <h2 class="text-md font-bold mb-2 text-center">{% trans %}Modifier un commentaire{% endtrans %}</h2>
         {{ form_start(form_comment) }}
         {{ form_row(form_comment.author, {'label':'Votre nom'|trans, 'attr': {'placeholder': 'Votre nom'|trans}}) }}

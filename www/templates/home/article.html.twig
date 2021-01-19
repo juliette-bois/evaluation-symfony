@@ -20,7 +20,7 @@
             {% endif %}
 
             {% if app.user %}
-              <a class="px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 mt-4 ml-auto inline-block" href="{{ path("article_delete", {'id': article.id})}}">{% trans %}Supprimer l'article{% endtrans %}</a>
+              <a class="px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 mt-4 ml-auto inline-block" href="{{ path("delete_article", {'id': article.id})}}">{% trans %}Supprimer l'article{% endtrans %}</a>
             {% endif %}
         </section>
         <div id="error-div" class="h-12 bg-red-400 rounded hidden items-center justify-center w-1/2">

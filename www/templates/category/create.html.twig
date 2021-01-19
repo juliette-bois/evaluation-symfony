@@ -6,7 +6,7 @@
 
   <div class="container mx-auto px-4 py-8">
     <a href="{{ path("show_categories") }}">{% trans %}Retour{% endtrans %}</a>
-    <h1 class="text-center text-xl font-bold mb-4">{% trans %}Créer une catégorie{% endtrans %}</h1>
+    <h1 class="text-center text-xl font-bold mb-4">{% if edit_mode %} {% trans %}Modifier une catégorie{% endtrans %} {% else %} {% trans %}Créer une catégorie{% endtrans %} {% endif %}</h1>
     <section class="py-12">
       {{ form_start(form_article) }}
       {{ form_row(form_article.title, {'label':'Titre'|trans, 'attr': {'placeholder': 'Titre'|trans}}) }}

@@ -4,9 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Form\CategoryType;
-use App\Repository\ArticleRepository;
 use App\Repository\CategoryRepository;
-use App\Repository\CommentRepository;
 use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -45,15 +43,17 @@ class CategoryController extends AbstractController
         }
 
         return $this->render('category/create.html.twig', [
-            'form_article' => $category_form->createView()
+            'form_article' => $category_form->createView(),
+            'edit_mode' => $category->getId() !== null
         ]);
     }
 
-  /**
-   * @Route("/show/categories", name="show_categories")
-   * @param CategoryRepository $categoryRepo
-   * @return Response
-   */
+
+    /**
+     * @Route("categories", name="show_categories")
+     * @param CategoryRepository $categoryRepo
+     * @return Response
+     */
     public function showCategories(CategoryRepository  $categoryRepo): Response
     {
         $categories = $categoryRepo->findAll();
@@ -62,6 +62,7 @@ class CategoryController extends AbstractController
             'categories' => $categories
         ]);
     }
+
 
     /**
      * @Route("/delete/category/{id}", name="delete_category")
