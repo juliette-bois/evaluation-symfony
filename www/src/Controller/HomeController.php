@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Entity\Comment;
+use App\Entity\User;
 use App\Form\CommentType;
 use App\Repository\ArticleRepository;
 use App\Repository\CommentRepository;
@@ -26,7 +27,7 @@ class HomeController extends AbstractController
     {
         $articles = $repo->findAll();
 
-        return $this->render('home/update.html.twig', [
+        return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
             'articles' => $articles
         ]);

@@ -30,6 +30,22 @@ class Comment
     private $email;
 
     /**
+     * @return mixed
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param mixed $email
+     */
+    public function setEmail($email): void
+    {
+        $this->email = $email;
+    }
+
+    /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank
      */
@@ -61,18 +77,6 @@ class Comment
         $this->author = $author;
 
         return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-      return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-      $this->email = $email;
-
-      return $this;
     }
 
     public function getContent(): ?string

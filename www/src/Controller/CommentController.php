@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Comment;
 use App\Form\CommentType;
+use App\Repository\CategoryRepository;
+use App\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,6 +14,21 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CommentController extends AbstractController
 {
+  /**
+   * @Route("comments", name="show_comments")
+   * @param CommentRepository $commentRepo
+   * @return Response
+   */
+    public function showComments(CommentRepository  $commentRepo): Response
+    {
+        $comments = $commentRepo->findAll();
+
+        return $this->render('comment/index.html.twig', [
+            'comments' => $comments
+        ]);
+    }
+
+
     /**
      * @Route("/edit/comment/{id}", name="edit_comment")
      * @param Comment $comment

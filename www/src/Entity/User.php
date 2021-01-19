@@ -48,6 +48,27 @@ class User implements \Symfony\Component\Security\Core\User\UserInterface
      */
     public $confirm_password;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isAdmin;
+
+    /**
+     * @return mixed
+     */
+    public function getIsAdmin()
+    {
+        return $this->isAdmin;
+    }
+
+    /**
+     * @param mixed $isAdmin
+     */
+    public function setIsAdmin($isAdmin): void
+    {
+        $this->isAdmin = $isAdmin;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

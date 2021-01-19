@@ -20,7 +20,7 @@
         {% endfor %}
       </section>
     {% else %}
-      <h2 class="text-lg font-bold mb-20">{% trans %}Vous n'avez pas d'article. {% endtrans %}<a class="text-indigo-600" href="{{ path("new_article") }}">{% trans %}Créer un article !{% endtrans %}</a></h2>
+      <h2 class="text-lg font-bold mb-20">{% trans %}Vous n'avez pas d'article.{% endtrans %} <a class="text-indigo-600" href="{{ path("new_article") }}">{% trans %}Créer un article !{% endtrans %}</a></h2>
     {% endif %}
     <span class="block w-full bg-gray-300 h-0.5"></span>
     <h2 class="text-center text-xl font-bold mb-4 mt-8">{% trans %}Mes commentaires{% endtrans %}</h2>
