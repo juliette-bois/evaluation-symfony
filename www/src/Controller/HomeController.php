@@ -44,18 +44,25 @@ class HomeController extends AbstractController
     public function showArticle(Article $article, Request $request, EntityManagerInterface $manager, SendEmail $mailer): Response
     {
         $comment = new Comment();
+
         $form_comment = $this->createForm(CommentType::class, $comment);
+
         $form_comment->handleRequest($request);
-        if ($form_comment->isSubmitted() && $form_comment->isValid()) {
-            $comment->setCreatedAt(new \DateTime())
+
+        $submittedToken = $request->request->get('comment')['_token'];
+
+        if ($this->isCsrfTokenValid('comment_form', $submittedToken)) {
+            if ($form_comment->isSubmitted() && $form_comment->isValid()) {
+                $comment->setCreatedAt(new \DateTime())
                     ->setArticle($article);
 
-            $mailer->sendConfirmMessage($comment, $article);
+                $mailer->sendConfirmMessage($comment, $article);
 
-            $manager->persist($comment);
-            $manager->flush();
+                $manager->persist($comment);
+                $manager->flush();
 
-            return $this->redirectToRoute('article_show', ['id' => $article->getId()]);
+                return $this->redirectToRoute('article_show', ['id' => $article->getId()]);
+            }
         }
 
         return $this->render('home/article.html.twig', [

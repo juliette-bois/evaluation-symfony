@@ -38,13 +38,19 @@ class CommentController extends AbstractController
      */
     public function updateComment(Comment $comment, Request $request, EntityManagerInterface $manager): Response
     {
-        $form_comment = $this->createForm(CommentType::class, $comment);
-        $form_comment->handleRequest($request);
-        if ($form_comment->isSubmitted() && $form_comment->isValid()) {
-            $manager->persist($comment);
-            $manager->flush();
+        $submittedToken = $request->request->get('comment')['_token'];
 
-            return $this->redirectToRoute('articles');
+        $form_comment = $this->createForm(CommentType::class, $comment);
+
+        $form_comment->handleRequest($request);
+
+        if ($this->isCsrfTokenValid('comment_form', $submittedToken)) {
+            if ($form_comment->isSubmitted() && $form_comment->isValid()) {
+                $manager->persist($comment);
+                $manager->flush();
+
+                return $this->redirectToRoute('show_articles');
+            }
         }
 
         return $this->render('comment/update.html.twig', [

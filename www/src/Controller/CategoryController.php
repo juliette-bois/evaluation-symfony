@@ -32,15 +32,19 @@ class CategoryController extends AbstractController
             $category = new Category();
         }
 
+        $submittedToken = $request->request->get('category')['_token'];
+
         $category_form = $this->createForm(CategoryType::class, $category);
 
         $category_form->handleRequest($request);
 
-        if ($category_form->isSubmitted() && $category_form->isValid()) {
-            $manager->persist($category);
-            $manager->flush();
+        if ($this->isCsrfTokenValid('category_form', $submittedToken)) {
+            if ($category_form->isSubmitted() && $category_form->isValid()) {
+                $manager->persist($category);
+                $manager->flush();
 
-            return $this->redirectToRoute('home');
+                return $this->redirectToRoute('show_categories');
+            }
         }
 
         return $this->render('category/create.html.twig', [

@@ -13,7 +13,7 @@
           <h2 class="text-lg font-bold"># {{ category.id }} - {{ category.title }}</h2>
           <p>{{ category.description | raw }}</p>
           <a href="{{ path("edit_category", {'id': category.id}) }}" class="px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 mt-4 inline-block">{% trans %}Modifier la catégorie{% endtrans %}</a>
-          <a id="delete_button" onclick="validate({{ category.id }})" class="px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 mt-4 inline-block">{% trans %}Supprimer la catégorie{% endtrans %}</a>
+          <a id="delete_button" onclick="validate({{ category.id }})" class="cursor-pointer px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 mt-4 inline-block">{% trans %}Supprimer la catégorie{% endtrans %}</a>
         </article>
       {% endfor %}
     </section>

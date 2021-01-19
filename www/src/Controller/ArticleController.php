@@ -32,28 +32,32 @@ class ArticleController extends AbstractController
             $article = new Article();
         }
 
+        $submittedToken = $request->request->get('article')['_token'];
+
         $form = $this->createForm(ArticleType::class, $article);
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $imageFile = $form->get('image')->getData();
-            if ($imageFile) {
-                $imageFileName = $fileUploader->upload($imageFile);
-                $article->setImage($imageFileName);
+        if ($this->isCsrfTokenValid('article_form', $submittedToken)) {
+            if ($form->isSubmitted() && $form->isValid()) {
+                $imageFile = $form->get('image')->getData();
+                if ($imageFile) {
+                    $imageFileName = $fileUploader->upload($imageFile);
+                    $article->setImage($imageFileName);
+                }
+
+                if (!$article->getId()) {
+                    $article->setCreatedAt(new \DateTime());
+                    $article->setCreatedBy($security->getUser()->getUsername());
+                }
+
+                $manager->persist($article);
+                $manager->flush();
+
+                return $this->redirectToRoute('article_show', [
+                    'id' => $article->getId()
+                ]);
             }
-
-            if (!$article->getId()) {
-                $article->setCreatedAt(new \DateTime());
-                $article->setCreatedBy($security->getUser()->getUsername());
-            }
-
-            $manager->persist($article);
-            $manager->flush();
-
-            return $this->redirectToRoute('article_show', [
-              'id' => $article->getId()
-            ]);
         }
 
         return $this->render('article/create.html.twig', [
