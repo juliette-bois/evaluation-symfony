@@ -8,6 +8,9 @@
     <h1 class="text-center text-xl font-bold mb-4">{% trans %}Bienvenue sur mon blog{% endtrans %}</h1>
     <p class="text-center text-gray-500	w-96 m-auto">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
     <section class="py-12">
+        {{ form_start(categories_select) }}
+        {{ form_row(categories_select.choice, {'label':'Choisir une catégorie'|trans}) }}
+        {{ form_end(categories_select) }}
         {% for article in articles %}
             <article class="bg-gray-100 p-8 rounded-xl mt-8">
                 <h2 class="text-lg font-bold">{{ article.title }}</h2>
@@ -20,4 +23,24 @@
     </section>
 </div>
 
+{% endblock %}
+{% block javascripts %}
+    <script>
+        let select = document.getElementById("form_choice");
+        let value = select.value;
+        select.addEventListener('change', event => {
+            let category = event.target.value;
+            category.selected = 'selected';
+            location.href = '{{ path("home") }}?category=' + category;
+            /*let httpRequest = new XMLHttpRequest();
+            httpRequest.open("post", "{{ path("home") }}");
+            httpRequest.setRequestHeader(
+                "Content-Type",
+                "application/json",
+            );
+            httpRequest.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+            httpRequest.send(JSON.stringify({category: category}));
+            location.reload();*/
+        });
+    </script>
 {% endblock %}
