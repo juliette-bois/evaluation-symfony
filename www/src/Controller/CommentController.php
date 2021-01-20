@@ -70,14 +70,22 @@ class CommentController extends AbstractController
 
 
     /**
-     * @Route("/delete/comment/{id}", name="delete_comment")
-     * @param Comment $comment
+     * @Route("/delete/comment", name="delete_comment")
      * @param Request $request
      * @param Security $security
      * @return Response
      */
-    public function deleteComment(Comment $comment, Request $request, Security $security): Response
+    public function deleteComment(Request $request, Security $security, CommentRepository $commentRepository): Response
     {
+
+        $values = json_decode($request->getContent(), true);
+
+        if (!$this->isCsrfTokenValid('delete-comment', $values['_token'])) {
+            throw $this->createAccessDeniedException('Access Denied.');
+        }
+
+        $comment = $commentRepository->find($values['id']);
+
         if ((!$security->getUser() || $security->getUser()->getUsername() !== $comment->getAuthor()) && !$this->isGranted('ROLE_ADMIN')) {
             throw $this->createAccessDeniedException('Access Denied.');
         }
@@ -86,6 +94,6 @@ class CommentController extends AbstractController
         $entityManager->remove($comment);
         $entityManager->flush();
 
-        return $this->redirectToRoute('articles');
+        return new Response(true);
     }
 }

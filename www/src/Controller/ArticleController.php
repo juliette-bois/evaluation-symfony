@@ -101,13 +101,22 @@ class ArticleController extends AbstractController
 
 
     /**
-     * @Route("/delete/article/{id}", name="delete_article")
-     * @param Article $article
+     * @Route("/delete/article", name="delete_article")
+     * @param Request $request
      * @param Security $security
+     * @param ArticleRepository $articleRepository
      * @return Response
      */
-    public function deleteArticle(Article $article, Security $security): Response
+    public function deleteArticle(Request $request, Security $security, ArticleRepository $articleRepository): Response
     {
+        $values = json_decode($request->getContent(), true);
+
+        if (!$this->isCsrfTokenValid('delete-article', $values['_token'])) {
+            throw $this->createAccessDeniedException('Access Denied.');
+        }
+
+        $article = $articleRepository->find($values['id']);
+
         if ((!$security->getUser() || $security->getUser()->getUsername() !== $article->getCreatedBy()) && !$this->isGranted('ROLE_ADMIN')) {
             throw $this->createAccessDeniedException('Access Denied.');
         }

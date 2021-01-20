@@ -90,6 +90,11 @@ class CategoryController extends AbstractController
         }
 
         $values = json_decode($request->getContent(), true);
+
+        if (!$this->isCsrfTokenValid('delete-category', $values['_token'])) {
+            throw $this->createAccessDeniedException('Access Denied.');
+        }
+
         $category = $categoryRepository->find($values['id']);
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($category);

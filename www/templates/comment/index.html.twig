@@ -12,10 +12,9 @@
           <h2 class="text-lg font-bold"># {{ comment.id }} - {% trans %}Ecrit par{% endtrans %} <span class="font-medium text-indigo-600">{{ comment.author }}</span></h2>
           <p>{{ comment.content | raw }}</p>
           <a href="{{ path("edit_comment", {'id': comment.id}) }}" class="px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 mt-4 inline-block">{% trans %}Modifier le commentaire{% endtrans %}</a>
-          <a href="{{ path("delete_comment", {'id': comment.id}) }}" class="px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 mt-4 inline-block">{% trans %}Supprimer le commentaire{% endtrans %}</a>
+          <a onclick="validate({{ comment.id }}, 'Attention, êtes-vous sûr de bien vouloir supprimer ce commentaire ?', {{ path("delete_comment") }}, {{ csrf_token('delete-comment') }})" class="cursor-pointer px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 mt-4 inline-block">{% trans %}Supprimer le commentaire{% endtrans %}</a>
         </article>
       {% endfor %}
     </section>
   </div>
-
 {% endblock %}
