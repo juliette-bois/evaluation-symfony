@@ -5,7 +5,12 @@
 {% block body %}
 
   <div class="container mx-auto px-4">
-    <a href="{{ path("article_show", {'id': id}) }}">{% trans %}Retour{% endtrans %}</a>
+    {% if edit_mode %}
+        <a href="{{ path("article_show", {'id': id}) }}">{% trans %}Retour{% endtrans %}</a>
+    {% else %}
+        <a href="{{ path("home") }}">{% trans %}Retour{% endtrans %}</a>
+    {% endif %}
+
     {% if app.user %}
       <h1 class="text-center text-xl font-bold mb-4">{% if edit_mode %} {% trans %}Modifier un article{% endtrans %} {% else %} {% trans %}Créer l'article{% endtrans %} {% endif %}</h1>
       {{ form_start(form_article) }}

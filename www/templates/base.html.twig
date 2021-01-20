@@ -40,7 +40,7 @@
         {% block body %}{% endblock %}
         {% block javascripts %}
         <script>
-            function validate(id, message, path, token) {
+            function validate(id, message, path, token, redirect = null) {
                 const translations = {
                     'warning_message': {% trans %}message{% endtrans %}
                 }
@@ -54,7 +54,11 @@
                     );
                     httpRequest.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
                     httpRequest.send(JSON.stringify({id: id, _token: token}));
-                    location.reload();
+                    if (redirect) {
+                        location.href = redirect;
+                    } else {
+                        location.reload();
+                    }
                 }
             }
         </script>

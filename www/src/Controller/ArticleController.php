@@ -30,14 +30,14 @@ class ArticleController extends AbstractController
     public function index(Request $request, EntityManagerInterface $manager, Security $security, FileUploader $fileUploader, Article $article = null): Response
     {
         if (!$this->isGranted('IS_AUTHENTICATED_FULLY')) {
-            return $this->redirectToRoute('login');
+            return $this->redirectToRoute('security_login');
         }
 
         if (!$article) {
             $article = new Article();
         } else {
             if ((!$security->getUser() || $security->getUser()->getUsername() !== $article->getCreatedBy()) && !$this->isGranted('ROLE_ADMIN')) {
-                return $this->redirectToRoute('home');
+                return $this->redirectToRoute('security_login');
             }
         }
 
