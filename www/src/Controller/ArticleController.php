@@ -86,7 +86,7 @@ class ArticleController extends AbstractController
      */
     public function showArticles(ArticleRepository  $articleRepo, CommentRepository $commentRepo, Security $security): Response
     {
-        if ($this->isGranted('IS_AUTHENTICATED_FULLY')) {
+        if (!$this->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('home');
         }
 

@@ -15,7 +15,7 @@
             <img class="my-4" src="{{ asset('uploads/images/' ~ article.image) }}" alt="{{ article.title }}">
             <p>{{ article.content | raw }}</p>
             <a class="px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 mt-4 ml-auto inline-block" href="{{ path("edit_article", {'id': article.id})}}">{% trans %}Modifier l'article{% endtrans %}</a>
-            <a onclick="validate({{ article.id }}, 'Attention, êtes-vous sûr de bien vouloir supprimer cet article ?', {{ path("delete_article") }}, {{ csrf_token('delete-article') }})" class="cursor-pointer px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 mt-4 ml-auto inline-block" href="{{ path("delete_article", {'id': article.id})}}">{% trans %}Supprimer l'article{% endtrans %}</a>
+            <a onclick="validate({{ article.id }}, 'Attention, êtes-vous sûr de bien vouloir supprimer cet article ?', '{{ path("delete_article") }}', '{{ csrf_token('delete-article') }}')" class="cursor-pointer px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 mt-4 ml-auto inline-block">{% trans %}Supprimer l'article{% endtrans %}</a>
           </article>
         {% endfor %}
       </section>
@@ -30,7 +30,7 @@
           <p class="text-gray-500 text-sm">{% trans %}Par{% endtrans %} {{ comment.author }}, {% trans %}le{% endtrans %} {{ comment.createdAt | date('d/m/y') }} {% trans %}à{% endtrans %} {{ comment.createdAt | date('H:i') }}</p>
           <p>{{ comment.content | raw }}</p>
           <a class="px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 mt-4 ml-auto inline-block" href="{{ path("edit_comment", {'id': comment.id})}}">{% trans %}Modifier le commentaire{% endtrans %}</a>
-          <a onclick="validate({{ comment.id }}, 'Attention, êtes-vous sûr de bien vouloir supprimer ce commentaire ?', {{ path("delete_comment") }}, {{ csrf_token('delete-comment') }})" class="cursor-pointer px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 mt-4 ml-auto inline-block" href="{{ path("delete_comment", {'id': comment.id})}}">{% trans %}Supprimer le commentaire{% endtrans %}</a>
+          <a onclick="validate({{ comment.id }}, 'Attention, êtes-vous sûr de bien vouloir supprimer ce commentaire ?', '{{ path("delete_comment") }}', '{{ csrf_token('delete-comment') }}')" class="cursor-pointer px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 mt-4 ml-auto inline-block">{% trans %}Supprimer le commentaire{% endtrans %}</a>
         </div>
         <span class="block w-full bg-gray-300 h-0.5 mt-8"></span>
       {% endfor %}
