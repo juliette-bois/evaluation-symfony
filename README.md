@@ -1,27 +1,16 @@
 # Évaluation Symfony
 
 ## Objectif du projet
-Développer une application à l'aide du framework Symfony.    	
-L'application devra intégrer un front et un back office. 
-L'espace d'adminstration permettra aux utilisateurs authentifiés d'administrer (ajouter, modifier, supprimer) les différents contenus.
-Le projet devra permettre la gestion des pages, sections, médias et commentaires.
+Développer une application à l'aide du framework Symfony. Ici il s'agira d'un blog avec des articles et des commentaires.	
 
 ## Spécifications des différentes pages
-1. Une home liste l'ensemble des articles de blog
+1. Une home liste l'ensemble des articles de blog. Un filtre permet de filtrer les articles affichés par catégorie.
 2. Une page "article" permet d'en savoir plus sur cet article, notamment en voyant les commentaires associés.
 	- si on est authentifié, on peut poster un commentaire
 3. Une page "mes articles", accessible si on est authentifié et qui permet de voir ses articles et ses commentaires, de les modifier ou supprimer.
 4. Une page "créer un article" permet de créer un article si on est authentifié
 5. Une page de "Login" et "Register" pour l'authentification
-6. Enfin, un statut "SuperAdmin" existe et c'est l'administrateur global du blog. Être authentifié en tant que "SuperAdmin" permet de modérer les commentaires avant publication, de supprimer ou modifier un commentaire ou un article de n'importe quel utilisateur.
-
-## Tâches / Features
-* Integration
-* Front
-* Comment
-* Article
-* Category
-* Workflow
+6. Enfin, un statut "SuperAdmin" existe et c'est l'administrateur global du blog. Être authentifié en tant que "SuperAdmin" permet de modérer les commentaires avant publication, de supprimer ou modifier un commentaire ou un article de n'importe quel utilisateur. Pour être "SuperAdmin", il faut [créer un utilisateur](http://localhost:8000/registration) puis aller changer à la main le champs `is_admin` en mettant 1.
 
 ## Faire fonctionner le projet
 ### Installation  
@@ -56,6 +45,7 @@ php bin/console doctrine:fixtures:load
 ## Features
 * Fixtures pour créer un jeu de donnée avec PHP faker
 * Filtres avec Twig (date, raw)
+* Filtrer les articles affichés par catégorie
 * Traductions (avec symfony/translation)
 * Authentification (avec make:auth)
 * Envoie d'emails quand on écrit un commentaire (avec symfony/mailer)
