@@ -25,7 +25,7 @@ Le projet devra permettre la gestion des pages, sections, médias et commentaire
 
 ## Faire fonctionner le projet
 ### Installation  
-Au minimum, il faut utiliser PHP en version 7.3, Symfony en version 5.1.8 et Composer en version 2.0.7
+Au minimum, il faut utiliser PHP en version 7.3, Symfony en version 5.2.1 et Composer en version 1.9.0
   
 ```bash  
 git clone https://github.com/juliette-bois/evaluation-symfony.git  
@@ -35,48 +35,40 @@ composer install --ignore-platform-reqs
 ``` 
 
 ## Usage  
-### Start
+### 1. Start
 Start server
-```bash  
-symfony server:start 
-```  
-or
 ```bash  
 php -S localhost:8000 -t public
 ``` 
 
-### Fixtures  
+### 2. Create database with migrations  
 Load fixtures   
 ```bash  
-php bin/console hautelook:fixtures:load  
-```  
-  
-Load fixtures, database won't be purged  
-```bash  
-php bin/console hautelook:fixtures:load --append  
-```  
+php bin/console doctrine:migrations:migrate
+```
 
-## Usage  
-### Start
-Start server
-```bash  
-symfony server:start 
-```  
-or
-```bash  
-php -S localhost:8000 -t public
-``` 
-
-### Fixtures  
+### 3. Fixtures  
 Load fixtures   
 ```bash  
-php bin/console hautelook:fixtures:load  
-```  
-  
-Load fixtures, database won't be purged  
-```bash  
-php bin/console hautelook:fixtures:load --append  
-```  
+php bin/console doctrine:fixtures:load  
+```
   
 ## Features
-* 
+* Fixtures pour créer un jeu de donnée avec PHP faker
+* Filtres avec Twig (date, raw)
+* Traductions (avec symfony/translation)
+* Authentification (avec make:auth)
+* Envoie d'emails quand on écrit un commentaire (avec symfony/mailer)
+* Utilisation de Doctrine
+* Admin/User
+* CRUD pour les articles, commentaires et catégories (seulement pour les admins)
+* Relation entre les entités
+* Pouvoir uploder des images
+* Créations de formulaires + validations
+* Protection des routes
+* Protections des formulaires (avec symfony/security-csrf)
+* Sécuriser le blog (avec symfony/security-bundle)
+
+## To do
+* Utiliser le composant Workflow pour les entités Article et Comment avec 3 status : TO_REVIEW, PUBLISHED et REJECTED. On imagine que lorsqu'un utilisateur authentifié poste un article (ou un commentaire), cela envoie un mail à l'admin (via Mailer). L'article (ou le commentaire) aura alors un état TO_REVIEW tant que l'admin ne validera pas l'article (ou le commentaire) pour le rendre PUBLISHED et être publié sur le blog. Ou bien il pourra le refuser. L'article (ou le commentaire) aura alors un état REFUSED. Dans ces deux derniers cas, l'utilisateur en question recevra un email pour savoir si son post a été accepté ou refusé par l'admin.
+
