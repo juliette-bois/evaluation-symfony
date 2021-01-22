@@ -25,23 +25,22 @@ composer require symfony/workflow:5.2.1 --ignore-platform-reqs
 ``` 
 
 ## Usage  
-### 1. Start
-Start server
-```bash  
-php -S localhost:8000 -t public
-``` 
-
-### 2. Create database with migrations  
+### 1. Create database with migrations  
 Load fixtures   
 ```bash  
 php bin/console doctrine:migrations:migrate
 ```
 
-### 3. Fixtures  
+### 2. Fixtures  
 Load fixtures   
 ```bash  
 php bin/console doctrine:fixtures:load  
 ```
+### 3. Start
+Start server
+```bash  
+php -S localhost:8000 -t public
+``` 
   
 ## Features
 * Fixtures pour créer un jeu de donnée avec PHP faker
