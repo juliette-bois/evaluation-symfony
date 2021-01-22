@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    section {
+      margin: 0 auto;
+      padding: 50px 100px;
+      font-family: Avenir, serif;
+    }
+
+    @media (max-width: 500px) {
+      section {
+        padding: 50px 15px;
+      }
+    }
+
+    h1 {
+      font-size: 25px;
+      text-align: center;
+    }
+
+    a {
+      color: darkgreen;
+      font-weight: bold;
+    }
+
+    div {
+      margin-top: 80px;
+    }
+  </style>
+</head>
+<body>
+  <section>
+    <h1>Un commentaire est en attente de validation</h1>
+    <p>{{ author }}, a posté ce commentaire le {{ createdAt | date('d/m/y') }} à {{ createdAt | date('H:i') }} pour l'article
+      <a href="http://localhost:8000/article/{{ articleId }}">{{ articleName }}</a></p>
+    <p>Lien pour review le commentaire : <a href="http://localhost:8000/comments">cliquez-ici</a></p>
+  </section>
+</body>
+</html>

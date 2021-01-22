@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="VJP9nbJ" resname="Bienvenue sur mon blog">
+        <source>Bienvenue sur mon blog</source>
+        <target>Bienvenue sur mon blog</target>
+      </trans-unit>
+      <trans-unit id="U8rIzBT" resname="Ecrit le">
+        <source>Ecrit le</source>
+        <target>Ecrit le</target>
+      </trans-unit>
+      <trans-unit id="s.yd5Sb" resname="à">
+        <source>à</source>
+        <target>à</target>
+      </trans-unit>
+      <trans-unit id="ydnSxL6" resname="par">
+        <source>par</source>
+        <target>par</target>
+      </trans-unit>
+      <trans-unit id="3x5Xsog" resname="Voir plus">
+        <source>Voir plus</source>
+        <target>Voir plus</target>
+      </trans-unit>
+      <trans-unit id="QZ.2iPz" resname="Mes articles">
+        <source>Mes articles</source>
+        <target>Mes articles</target>
+      </trans-unit>
+      <trans-unit id="0YvF3qR" resname="Modifier l'article">
+        <source>Modifier l'article</source>
+        <target>Modifier l'article</target>
+      </trans-unit>
+      <trans-unit id="4VGPHng" resname="Vous n'avez pas d'article.">
+        <source>Vous n'avez pas d'article.</source>
+        <target>Vous n'avez pas d'article.</target>
+      </trans-unit>
+      <trans-unit id="SoDHHUw" resname="Créer un article !">
+        <source>Créer un article !</source>
+        <target>Créer un article !</target>
+      </trans-unit>
+      <trans-unit id="HOr3Qcv" resname="Mes commentaires">
+        <source>Mes commentaires</source>
+        <target>Mes commentaires</target>
+      </trans-unit>
+      <trans-unit id="3pk2Avb" resname="Par">
+        <source>Par</source>
+        <target>Par</target>
+      </trans-unit>
+      <trans-unit id="YQmKS.K" resname="le">
+        <source>le</source>
+        <target>le</target>
+      </trans-unit>
+      <trans-unit id="_QWHbRN" resname="Supprimer le commentaire">
+        <source>Supprimer le commentaire</source>
+        <target>Supprimer le commentaire</target>
+      </trans-unit>
+      <trans-unit id="Ogk.zDl" resname="Vous n'avez pas écrit de commentaire...">
+        <source>Vous n'avez pas écrit de commentaire...</source>
+        <target>Vous n'avez pas écrit de commentaire...</target>
+      </trans-unit>
+      <trans-unit id="7yOllAJ" resname="Retour">
+        <source>Retour</source>
+        <target>Retour</target>
+      </trans-unit>
+      <trans-unit id="Zh.7ORP" resname="Supprimer l'article">
+        <source>Supprimer l'article</source>
+        <target>Supprimer l'article</target>
+      </trans-unit>
+      <trans-unit id="YoLtyd8" resname="Connectez-vous &lt;/a&gt;si vous souhaitez modifier un article">
+        <source>Connectez-vous &lt;/a&gt;si vous souhaitez modifier un article</source>
+        <target><![CDATA[Connectez-vous </a>si vous souhaitez modifier un article]]></target>
+      </trans-unit>
+      <trans-unit id="0o_ykG2" resname="commentaire">
+        <source>commentaire</source>
+        <target>commentaire</target>
+      </trans-unit>
+      <trans-unit id="EI8yWgH" resname="commentaires">
+        <source>commentaires</source>
+        <target>commentaires</target>
+      </trans-unit>
+      <trans-unit id="R69wCAD" resname="Poster un commentaire">
+        <source>Poster un commentaire</source>
+        <target>Poster un commentaire</target>
+      </trans-unit>
+      <trans-unit id="LbKonXo" resname="Votre nom">
+        <source>Votre nom</source>
+        <target>Votre nom</target>
+      </trans-unit>
+      <trans-unit id="QERVmkw" resname="Votre message">
+        <source>Votre message</source>
+        <target>Votre message</target>
+      </trans-unit>
+      <trans-unit id="0v6MVcL" resname="Votre commentaire">
+        <source>Votre commentaire</source>
+        <target>Votre commentaire</target>
+      </trans-unit>
+      <trans-unit id="CAyscC8" resname="Commenter">
+        <source>Commenter</source>
+        <target>Commenter</target>
+      </trans-unit>
+      <trans-unit id="4kXwNt7" resname="Connectez-vous &lt;/a&gt;si vous souhaitez poster un commentaire !">
+        <source>Connectez-vous &lt;/a&gt;si vous souhaitez poster un commentaire !</source>
+        <target><![CDATA[Connectez-vous </a>si vous souhaitez poster un commentaire !]]></target>
+      </trans-unit>
+      <trans-unit id="CsPSyzA" resname="Se connecter">
+        <source>Se connecter</source>
+        <target>Se connecter</target>
+      </trans-unit>
+      <trans-unit id="_V5fdQs" resname="Content de vous revoir !">
+        <source>Content de vous revoir !</source>
+        <target>Content de vous revoir !</target>
+      </trans-unit>
+      <trans-unit id="szwn32b" resname="Adresse email">
+        <source>Adresse email</source>
+        <target>Adresse email</target>
+      </trans-unit>
+      <trans-unit id=".5yLjAZ" resname="Mot de passe">
+        <source>Mot de passe</source>
+        <target>Mot de passe</target>
+      </trans-unit>
+      <trans-unit id="nG3OLrS" resname="Je me connecte">
+        <source>Je me connecte</source>
+        <target>Je me connecte</target>
+      </trans-unit>
+      <trans-unit id="YbMrFPA" resname="Vous n'avez pas de compte ?">
+        <source>Vous n'avez pas de compte ?</source>
+        <target>Vous n'avez pas de compte ?</target>
+      </trans-unit>
+      <trans-unit id="8ayu24d" resname="Se créer un compte">
+        <source>Se créer un compte</source>
+        <target>Se créer un compte</target>
+      </trans-unit>
+      <trans-unit id="z7GsDIB" resname="Inscription">
+        <source>Inscription</source>
+        <target>Inscription</target>
+      </trans-unit>
+      <trans-unit id="RQl7Xyo" resname="Bienvenue, ravie de faire ta connaissance !">
+        <source>Bienvenue, ravie de faire ta connaissance !</source>
+        <target>Bienvenue, ravie de faire ta connaissance !</target>
+      </trans-unit>
+      <trans-unit id="hRdkX4h" resname="Nom d'utilisateur">
+        <source>Nom d'utilisateur</source>
+        <target>Nom d'utilisateur</target>
+      </trans-unit>
+      <trans-unit id="wWgmfJR" resname="Confirmer votre mot de passe">
+        <source>Confirmer votre mot de passe</source>
+        <target>Confirmer votre mot de passe</target>
+      </trans-unit>
+      <trans-unit id="zOKvKHZ" resname="Je m'inscris">
+        <source>Je m'inscris</source>
+        <target>Je m'inscris</target>
+      </trans-unit>
+      <trans-unit id="nJ0pmH0" resname="Vous avez déjà un compte ?">
+        <source>Vous avez déjà un compte ?</source>
+        <target>Vous avez déjà un compte ?</target>
+      </trans-unit>
+      <trans-unit id="wpkGDG." resname="Modifier un article">
+        <source>Modifier un article</source>
+        <target>Modifier un article</target>
+      </trans-unit>
+      <trans-unit id="qc0zpee" resname="Créer l'article">
+        <source>Créer l'article</source>
+        <target>Créer l'article</target>
+      </trans-unit>
+      <trans-unit id="xtDSRud" resname="Titre de l'article">
+        <source>Titre de l'article</source>
+        <target>Titre de l'article</target>
+      </trans-unit>
+      <trans-unit id="9C1FhLr" resname="Catégorie de l'article">
+        <source>Catégorie de l'article</source>
+        <target>Catégorie de l'article</target>
+      </trans-unit>
+      <trans-unit id="Y6_ABz8" resname="Contenu de l'article">
+        <source>Contenu de l'article</source>
+        <target>Contenu de l'article</target>
+      </trans-unit>
+      <trans-unit id="t.X74et" resname="Image de l'article">
+        <source>Image de l'article</source>
+        <target>Image de l'article</target>
+      </trans-unit>
+      <trans-unit id="QuN2BLY" resname="Modifier">
+        <source>Modifier</source>
+        <target>Modifier</target>
+      </trans-unit>
+      <trans-unit id="cdx0hz4" resname="Enregistrer">
+        <source>Enregistrer</source>
+        <target>Enregistrer</target>
+      </trans-unit>
+      <trans-unit id="JY21PT5" resname="Mon blog">
+        <source>Mon blog</source>
+        <target>Mon blog</target>
+      </trans-unit>
+      <trans-unit id="LkrYGJ4" resname="Créer un article">
+        <source>Créer un article</source>
+        <target>Créer un article</target>
+      </trans-unit>
+      <trans-unit id="YdaVBBA" resname="Connexion">
+        <source>Connexion</source>
+        <target>Connexion</target>
+      </trans-unit>
+      <trans-unit id="_1_eksG" resname="Déconnexion">
+        <source>Déconnexion</source>
+        <target>Déconnexion</target>
+      </trans-unit>
+      <trans-unit id="YRqsXQb" resname="Connectez-vous &lt;/a&gt;si vous souhaitez créer un article">
+        <source>Connectez-vous &lt;/a&gt;si vous souhaitez créer un article</source>
+        <target><![CDATA[Connectez-vous </a>si vous souhaitez créer un article]]></target>
+      </trans-unit>
+      <trans-unit id="ViMXmhv" resname="Modifier un commentaire">
+        <source>Modifier un commentaire</source>
+        <target>Modifier un commentaire</target>
+      </trans-unit>
+      <trans-unit id="oPt21Gu" resname="Votre email">
+        <source>Votre email</source>
+        <target>Votre email</target>
+      </trans-unit>
+      <trans-unit id="YmunqJ." resname="Valider">
+        <source>Valider</source>
+        <target>Valider</target>
+      </trans-unit>
+      <trans-unit id="zfukYDA" resname="Modifier le commentaire">
+        <source>Modifier le commentaire</source>
+        <target>Modifier le commentaire</target>
+      </trans-unit>
+      <trans-unit id="pP_SHNx" resname="Choisir une catégorie">
+        <source>Choisir une catégorie</source>
+        <target>Choisir une catégorie</target>
+      </trans-unit>
+      <trans-unit id="ut0ymIP" resname="Articles en attente de validation">
+        <source>Articles en attente de validation</source>
+        <target>Articles en attente de validation</target>
+      </trans-unit>
+      <trans-unit id="xMn.ES0" resname="Articles publiés">
+        <source>Articles publiés</source>
+        <target>Articles publiés</target>
+      </trans-unit>
+      <trans-unit id="tGD3Mp0" resname="Publier l'article">
+        <source>Publier l'article</source>
+        <target>Publier l'article</target>
+      </trans-unit>
+      <trans-unit id="o28hdUC" resname="Refuser l'article">
+        <source>Refuser l'article</source>
+        <target>Refuser l'article</target>
+      </trans-unit>
+      <trans-unit id="q1MKE_R" resname="message">
+        <source>message</source>
+        <target>message</target>
+      </trans-unit>
+      <trans-unit id="0gc67be" resname="Les catégories">
+        <source>Les catégories</source>
+        <target>Les catégories</target>
+      </trans-unit>
+      <trans-unit id="rlrYByI" resname="Ajouter une catégorie">
+        <source>Ajouter une catégorie</source>
+        <target>Ajouter une catégorie</target>
+      </trans-unit>
+      <trans-unit id="P3Ikqmv" resname="Modifier la catégorie">
+        <source>Modifier la catégorie</source>
+        <target>Modifier la catégorie</target>
+      </trans-unit>
+      <trans-unit id="og61Lcm" resname="Supprimer la catégorie">
+        <source>Supprimer la catégorie</source>
+        <target>Supprimer la catégorie</target>
+      </trans-unit>
+      <trans-unit id="aRhBh3a" resname="Modifier une catégorie">
+        <source>Modifier une catégorie</source>
+        <target>Modifier une catégorie</target>
+      </trans-unit>
+      <trans-unit id="3Oy2Ql6" resname="Créer une catégorie">
+        <source>Créer une catégorie</source>
+        <target>Créer une catégorie</target>
+      </trans-unit>
+      <trans-unit id="eOeSABC" resname="Titre">
+        <source>Titre</source>
+        <target>Titre</target>
+      </trans-unit>
+      <trans-unit id="NFyxD1m" resname="Description (facultatif)">
+        <source>Description (facultatif)</source>
+        <target>Description (facultatif)</target>
+      </trans-unit>
+      <trans-unit id="Um4Ah8w" resname="Description">
+        <source>Description</source>
+        <target>Description</target>
+      </trans-unit>
+      <trans-unit id="4RolQIo" resname="Les commentaires">
+        <source>Les commentaires</source>
+        <target>Les commentaires</target>
+      </trans-unit>
+      <trans-unit id="8VpJepu" resname="En attente de validation">
+        <source>En attente de validation</source>
+        <target>En attente de validation</target>
+      </trans-unit>
+      <trans-unit id="OPiiAzy" resname="Ecrit par">
+        <source>Ecrit par</source>
+        <target>Ecrit par</target>
+      </trans-unit>
+      <trans-unit id="rvIkrJk" resname="Publier le commentaire">
+        <source>Publier le commentaire</source>
+        <target>Publier le commentaire</target>
+      </trans-unit>
+      <trans-unit id="kLjDeKl" resname="Refuser le commentaire">
+        <source>Refuser le commentaire</source>
+        <target>Refuser le commentaire</target>
+      </trans-unit>
+      <trans-unit id="iR5A1fT" resname="Publiés">
+        <source>Publiés</source>
+        <target>Publiés</target>
+      </trans-unit>
+      <trans-unit id="RKELrQu" resname="Refusé">
+        <source>Refusé</source>
+        <target>Refusé</target>
+      </trans-unit>
+      <trans-unit id="9516ize" resname="Commentaires">
+        <source>Commentaires</source>
+        <target>Commentaires</target>
+      </trans-unit>
+      <trans-unit id="uLHYlMa" resname="Categories">
+        <source>Categories</source>
+        <target>Categories</target>
+      </trans-unit>
+      <trans-unit id="y4tri_Y" resname="Articles refusés">
+        <source>Articles refusés</source>
+        <target>Articles refusés</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

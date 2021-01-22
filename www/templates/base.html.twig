@@ -4,38 +4,64 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
         <style>
-          form {
-            max-width: 600px;
-            margin: auto;
-          }
-
-          form .form-group {
-            margin-bottom: 15px;
-          }
-          form .form-group label {
-            display: block;
-          }
-          form .form-group input,
-          form .form-group textarea,
-          form .form-group select {
-            display: block;
-            border-radius: 4px;
-            color: #202124;
-            font-size: 16px;
-            margin: 1px 1px 0 1px;
-            padding: 8px 11px;
-            z-index: 1;
-            border: 1px solid lightgray;
-            width: 100%;
-          }
-        </style>
+                form {
+                    max-width: 600px;
+                    margin: auto;
+                }
+                form .form-group {
+                    margin-bottom: 15px;
+                }
+                form .form-group .invalid-feedback {
+                    color: red;
+                }
+                form .form-group label {
+                    display: block;
+                }
+                form .form-group input,
+                form .form-group textarea,
+                form .form-group select {
+                    display: block;
+                    border-radius: 4px;
+                    color: #202124;
+                    font-size: 16px;
+                    margin: 1px 1px 0 1px;
+                    padding: 8px 11px;
+                    z-index: 1;
+                    border: 1px solid lightgray;
+                    width: 100%;
+                }
+            </style>
+        {% endblock %}
     </head>
     <body>
         {% include 'partials/header.html.twig' %}
         {% block body %}{% endblock %}
-        {% include 'partials/footer.html.twig' %}
-        {% block javascripts %}{% endblock %}
+        {% block javascripts %}
+        <script>
+            function validate(id, message, path, token, redirect = null, validate = true) {
+                const translations = {
+                    'warning_message': {% trans %}message{% endtrans %}
+                }
+                if (!validate || confirm(translations.warning_message)) {
+                    const route = path;
+                    let httpRequest = new XMLHttpRequest();
+                    httpRequest.open("post", route);
+                    httpRequest.setRequestHeader(
+                        "Content-Type",
+                        "application/json",
+                    );
+                    httpRequest.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+                    httpRequest.send(JSON.stringify({id: id, _token: token}));
+                    if (redirect) {
+                        location.href = redirect;
+                    } else {
+                        location.reload();
+                    }
+                }
+            }
+        </script>
+        {% endblock %}
     </body>
 </html>

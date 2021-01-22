@@ -25,8 +25,8 @@ class Article
      * @Assert\Length(
      *      min = 2,
      *      max = 255,
-     *      minMessage = "Votre titre doit comporter au moins 2 caractères",
-     *      maxMessage = "Votre titre ne peut pas comporter plus de 255 caractères"
+     *      minMessage = "title.too.short",
+     *      maxMessage = "title.too.long"
      * )
      */
     private $title;
@@ -35,14 +35,13 @@ class Article
      * @ORM\Column(type="text")
      * @Assert\Length(
      *      min = 10,
-     *      minMessage = "Votre contenu doit comporter au moins {{limit}} caractères",
+     *      minMessage = "message.too.short",
      * )
      */
     private $content;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Url
      */
     private $image;
 
@@ -52,20 +51,27 @@ class Article
     private $createdAt;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="articles")
+     * @ORM\JoinColumn(nullable=false, referencedColumnName="id")
      */
-    private $createdBy;
+    private $user;
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="articles")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $category;
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="article", orphanRemoval=true)
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $comments;
+
+    /**
+     * @ORM\Column(type="string", length=255, options={"default" : "toreview"})
+     */
+    private $currentPlace = "toreview";
 
     public function __construct()
     {
@@ -125,14 +131,14 @@ class Article
         return $this;
     }
 
-    public function getCreatedBy(): ?string
+    public function getUser(): ?User
     {
-        return $this->createdBy;
+        return $this->user;
     }
 
-    public function setCreatedBy(string $createdBy): self
+    public function setUser(User $user): self
     {
-        $this->createdBy = $createdBy;
+        $this->user = $user;
 
         return $this;
     }
@@ -175,6 +181,18 @@ class Article
                 $comment->setArticle(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCurrentPlace()
+    {
+        return $this->currentPlace;
+    }
+
+    public function setCurrentPlace($currentPlace)
+    {
+        $this->currentPlace = $currentPlace;
 
         return $this;
     }

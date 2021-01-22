@@ -1,17 +1,36 @@
 <header class="py-8">
-    <div class="container mx-auto px-4 flex justify-between items-center">
-        <a href="{{ path("home") }}">Mon blog</a>
+    <div class="relative container mx-auto px-4 flex justify-between items-center">
+        <a href="{{ path("home") }}">{% trans %}Mon blog{% endtrans %}</a>
         <nav class="flex items-center">
             {% if app.user %}
-              <a class="ml-4" href="{{ path("articles") }}">Mes articles</a>
+              <a class="ml-4" href="{{ path("show_articles") }}">{% trans %}Mes articles{% endtrans %}</a>
             {% endif %}
-            <a class="ml-4" href="{{ path("new_article") }}">Créer un article</a>
+            {% if app.user and app.user.isAdmin == 1 %}
+              <a class="ml-4" href="{{ path("show_comments") }}">{% trans %}Commentaires{% endtrans %}</a>
+              <a class="ml-4" href="{{ path("show_categories") }}">{% trans %}Categories{% endtrans %}</a>
+            {% endif %}
+
+            {% if app.user %}
+              <a class="ml-4" href="{{ path("new_article") }}">{% trans %}Créer un article{% endtrans %}</a>
+            {% elseif not app.user %}
+              <a onclick="document.getElementById('error-div').style.display = 'flex'; return false;" class="ml-4" href="{{ path("new_article") }}">{% trans %}Créer un article{% endtrans %}</a>
+            {% endif %}
+
             {% if not app.user %}
-                <a class="text-indigo-600 hover:text-indigo-700 ml-4" href="{{ path("security_registration")}}">Se créer un compte</a>
-                <a class="px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 ml-4" href="{{ path("security_login")}}">Connexion</a>
+                <a class="text-indigo-600 hover:text-indigo-700 ml-4" href="{{ path("security_registration")}}">{% trans %}Se créer un compte{% endtrans %}</a>
+                <a class="px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 ml-4" href="{{ path("security_login")}}">{% trans %}Connexion{% endtrans %}</a>
             {% else %}
-                <a class="px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 ml-4" href="{{ path("security_logout")}}">Déconnexion</a>
+                <a class="px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 ml-4" href="{{ path("security_logout")}}">{% trans %}Déconnexion{% endtrans %}</a>
             {% endif %}
+
+            {% for locale in locales %}
+              {% if locale != app.request.locale %}
+                <a class="ml-4 uppercase font-bold" href="{{ path('change_locale', {'locale': locale}) }}">{{ locale }}</a>
+              {% endif %}
+            {% endfor %}
         </nav>
+    </div>
+    <div id="error-div" class="transform absolute left-1/2 -translate-x-1/2 h-12 bg-red-400 rounded hidden items-center justify-center w-1/2">
+      <p class="text-white"><a class="font-bold" href="{{ path('security_login') }}">{% trans %}Connectez-vous </a>si vous souhaitez créer un article{% endtrans %}</p>
     </div>
 </header>
