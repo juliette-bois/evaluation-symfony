@@ -19,7 +19,7 @@ Au minimum, il faut utiliser PHP en version 7.3, Symfony en version 5.2.1 et Com
 ```bash  
 git clone https://github.com/juliette-bois/evaluation-symfony.git  
   
-cd evaluation-symfony/  
+cd evaluation-symfony/www/
 composer install --ignore-platform-reqs
 composer require symfony/workflow:5.2.1 --ignore-platform-reqs
 ``` 
