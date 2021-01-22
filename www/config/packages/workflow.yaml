@@ -1,0 +1,44 @@
+framework:
+  workflows:
+    article_publishing:
+      type: 'state_machine'
+      audit_trail:
+        enabled: true
+      marking_store:
+        type: 'method'
+        property: 'currentPlace'
+      supports:
+        - App\Entity\Article
+      initial_marking: toreview
+      places:
+        - toreview
+        - rejected
+        - published
+      transitions:
+        publish:
+          from: toreview
+          to:   published
+        reject:
+          from: toreview
+          to:   rejected
+    comment_publishing:
+      type: 'state_machine'
+      audit_trail:
+        enabled: true
+      marking_store:
+        type: 'method'
+        property: 'currentPlace'
+      supports:
+        - App\Entity\Comment
+      initial_marking: toreview
+      places:
+        - toreview
+        - rejected
+        - published
+      transitions:
+        publish:
+          from: toreview
+          to: published
+        reject:
+          from: toreview
+          to: rejected

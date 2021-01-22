@@ -3,7 +3,11 @@
         <a href="{{ path("home") }}">{% trans %}Mon blog{% endtrans %}</a>
         <nav class="flex items-center">
             {% if app.user %}
-              <a class="ml-4" href="{{ path("articles") }}">{% trans %}Mes articles{% endtrans %}</a>
+              <a class="ml-4" href="{{ path("show_articles") }}">{% trans %}Mes articles{% endtrans %}</a>
+            {% endif %}
+            {% if app.user and app.user.isAdmin == 1 %}
+              <a class="ml-4" href="{{ path("show_comments") }}">{% trans %}Commentaires{% endtrans %}</a>
+              <a class="ml-4" href="{{ path("show_categories") }}">{% trans %}Categories{% endtrans %}</a>
             {% endif %}
 
             {% if app.user %}

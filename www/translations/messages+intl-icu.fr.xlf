@@ -225,6 +225,106 @@
         <source>Modifier le commentaire</source>
         <target>Modifier le commentaire</target>
       </trans-unit>
+      <trans-unit id="pP_SHNx" resname="Choisir une catégorie">
+        <source>Choisir une catégorie</source>
+        <target>Choisir une catégorie</target>
+      </trans-unit>
+      <trans-unit id="ut0ymIP" resname="Articles en attente de validation">
+        <source>Articles en attente de validation</source>
+        <target>Articles en attente de validation</target>
+      </trans-unit>
+      <trans-unit id="xMn.ES0" resname="Articles publiés">
+        <source>Articles publiés</source>
+        <target>Articles publiés</target>
+      </trans-unit>
+      <trans-unit id="tGD3Mp0" resname="Publier l'article">
+        <source>Publier l'article</source>
+        <target>Publier l'article</target>
+      </trans-unit>
+      <trans-unit id="o28hdUC" resname="Refuser l'article">
+        <source>Refuser l'article</source>
+        <target>Refuser l'article</target>
+      </trans-unit>
+      <trans-unit id="q1MKE_R" resname="message">
+        <source>message</source>
+        <target>message</target>
+      </trans-unit>
+      <trans-unit id="0gc67be" resname="Les catégories">
+        <source>Les catégories</source>
+        <target>Les catégories</target>
+      </trans-unit>
+      <trans-unit id="rlrYByI" resname="Ajouter une catégorie">
+        <source>Ajouter une catégorie</source>
+        <target>Ajouter une catégorie</target>
+      </trans-unit>
+      <trans-unit id="P3Ikqmv" resname="Modifier la catégorie">
+        <source>Modifier la catégorie</source>
+        <target>Modifier la catégorie</target>
+      </trans-unit>
+      <trans-unit id="og61Lcm" resname="Supprimer la catégorie">
+        <source>Supprimer la catégorie</source>
+        <target>Supprimer la catégorie</target>
+      </trans-unit>
+      <trans-unit id="aRhBh3a" resname="Modifier une catégorie">
+        <source>Modifier une catégorie</source>
+        <target>Modifier une catégorie</target>
+      </trans-unit>
+      <trans-unit id="3Oy2Ql6" resname="Créer une catégorie">
+        <source>Créer une catégorie</source>
+        <target>Créer une catégorie</target>
+      </trans-unit>
+      <trans-unit id="eOeSABC" resname="Titre">
+        <source>Titre</source>
+        <target>Titre</target>
+      </trans-unit>
+      <trans-unit id="NFyxD1m" resname="Description (facultatif)">
+        <source>Description (facultatif)</source>
+        <target>Description (facultatif)</target>
+      </trans-unit>
+      <trans-unit id="Um4Ah8w" resname="Description">
+        <source>Description</source>
+        <target>Description</target>
+      </trans-unit>
+      <trans-unit id="4RolQIo" resname="Les commentaires">
+        <source>Les commentaires</source>
+        <target>Les commentaires</target>
+      </trans-unit>
+      <trans-unit id="8VpJepu" resname="En attente de validation">
+        <source>En attente de validation</source>
+        <target>En attente de validation</target>
+      </trans-unit>
+      <trans-unit id="OPiiAzy" resname="Ecrit par">
+        <source>Ecrit par</source>
+        <target>Ecrit par</target>
+      </trans-unit>
+      <trans-unit id="rvIkrJk" resname="Publier le commentaire">
+        <source>Publier le commentaire</source>
+        <target>Publier le commentaire</target>
+      </trans-unit>
+      <trans-unit id="kLjDeKl" resname="Refuser le commentaire">
+        <source>Refuser le commentaire</source>
+        <target>Refuser le commentaire</target>
+      </trans-unit>
+      <trans-unit id="iR5A1fT" resname="Publiés">
+        <source>Publiés</source>
+        <target>Publiés</target>
+      </trans-unit>
+      <trans-unit id="RKELrQu" resname="Refusé">
+        <source>Refusé</source>
+        <target>Refusé</target>
+      </trans-unit>
+      <trans-unit id="9516ize" resname="Commentaires">
+        <source>Commentaires</source>
+        <target>Commentaires</target>
+      </trans-unit>
+      <trans-unit id="uLHYlMa" resname="Categories">
+        <source>Categories</source>
+        <target>Categories</target>
+      </trans-unit>
+      <trans-unit id="y4tri_Y" resname="Articles refusés">
+        <source>Articles refusés</source>
+        <target>Articles refusés</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
