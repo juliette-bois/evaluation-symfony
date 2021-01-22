@@ -60,4 +60,3 @@ php bin/console doctrine:fixtures:load
 * Protections des formulaires (avec symfony/security-csrf)
 * Sécuriser le blog (avec symfony/security-bundle)
 * Utilisation du composant Workflow pour les entités Article et Comment avec 3 status : TO_REVIEW, PUBLISHED et REJECTED. On imagine que lorsqu'un utilisateur authentifié poste un article (ou un commentaire), cela envoie un mail à l'admin (via Mailer). L'article (ou le commentaire) aura alors un état TO_REVIEW tant que l'admin ne validera pas l'article (ou le commentaire) pour le rendre PUBLISHED et être publié sur le blog. Ou bien il pourra le refuser. L'article (ou le commentaire) aura alors un état REFUSED. Dans ces deux derniers cas, l'utilisateur en question recevra un email pour savoir si son post a été accepté ou refusé par l'admin.
-
