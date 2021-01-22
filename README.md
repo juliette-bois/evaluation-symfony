@@ -21,6 +21,7 @@ git clone https://github.com/juliette-bois/evaluation-symfony.git
   
 cd evaluation-symfony/  
 composer install --ignore-platform-reqs
+composer require symfony/workflow:5.2.1 --ignore-platform-reqs
 ``` 
 
 ## Usage  
