@@ -14,7 +14,7 @@ Développer une application à l'aide du framework Symfony. Ici il s'agira d'un 
 
 ## Faire fonctionner le projet
 ### Installation  
-Au minimum, il faut utiliser PHP en version 7.3, Symfony en version 5.2.1 et Composer en version 1.9.0
+Au minimum, il faut utiliser PHP en version 7.3, Symfony en version 5.2.1 et Composer en version 2.0.8
   
 ```bash  
 git clone https://github.com/juliette-bois/evaluation-symfony.git  
