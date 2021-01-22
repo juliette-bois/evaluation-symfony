@@ -38,6 +38,9 @@ php bin/console doctrine:fixtures:load
 ```bash  
 php -S localhost:8000 -t public
 ``` 
+
+### 4. Mailtrap
+Dans le .env, modifier la variable MAILER_DSN ligne 23 avec votre congif smtp via Mailtrap
   
 ## Features
 * Fixtures pour créer un jeu de donnée avec PHP faker
