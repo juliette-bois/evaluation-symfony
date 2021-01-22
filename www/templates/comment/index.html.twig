@@ -7,12 +7,29 @@
   <div class="container mx-auto px-4 py-8">
     <h1 class="text-center text-xl font-bold mb-4">{% trans %}Les commentaires{% endtrans %}</h1>
     <section>
-      {% for comment in comments %}
+      <h2>{% trans %}En attente de validation{% endtrans %}</h2>
+      {% for comment in comments|filter(comment => 'toreview' == comment.currentPlace) %}
         <article class="bg-gray-100 p-8 rounded-xl mt-8">
-          <h2 class="text-lg font-bold"># {{ comment.id }} - {% trans %}Ecrit par{% endtrans %} <span class="font-medium text-indigo-600">{{ comment.author }}</span></h2>
+          <h2 class="text-lg font-bold"># {{ comment.id }} - {% trans %}Ecrit par{% endtrans %} <span class="font-medium text-indigo-600">{{ comment.user.username }}</span></h2>
+          <p>{{ comment.content | raw }}</p>
+          <a onclick="validate({{ comment.id }}, '', '{{ path("validate_comment") }}', '{{ csrf_token('validate-comment') }}', null, false)" class="cursor-pointer px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 mt-4 inline-block">{% trans %}Publier le commentaire{% endtrans %}</a>
+          <a onclick="validate({{ comment.id }}, '', '{{ path("refuse_comment") }}', '{{ csrf_token('refuse-comment') }}', null, false)" class="cursor-pointer px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 mt-4 inline-block">{% trans %}Refuser le commentaire{% endtrans %}</a>
+        </article>
+      {% endfor %}
+      <h2>{% trans %}Publiés{% endtrans %}</h2>
+      {% for comment in comments|filter(comment => 'published' == comment.currentPlace) %}
+        <article class="bg-gray-100 p-8 rounded-xl mt-8">
+          <h2 class="text-lg font-bold"># {{ comment.id }} - {% trans %}Ecrit par{% endtrans %} <span class="font-medium text-indigo-600">{{ comment.user.username }}</span></h2>
           <p>{{ comment.content | raw }}</p>
           <a href="{{ path("edit_comment", {'id': comment.id}) }}" class="px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 mt-4 inline-block">{% trans %}Modifier le commentaire{% endtrans %}</a>
           <a onclick="validate({{ comment.id }}, 'Attention, êtes-vous sûr de bien vouloir supprimer ce commentaire ?', '{{ path("delete_comment") }}', '{{ csrf_token('delete-comment') }}')" class="cursor-pointer px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 mt-4 inline-block">{% trans %}Supprimer le commentaire{% endtrans %}</a>
+        </article>
+      {% endfor %}
+      <h2>{% trans %}Refusé{% endtrans %}</h2>
+      {% for comment in comments|filter(comment => 'rejected' == comment.currentPlace) %}
+        <article class="bg-gray-100 p-8 rounded-xl mt-8">
+          <h2 class="text-lg font-bold"># {{ comment.id }} - {% trans %}Ecrit par{% endtrans %} <span class="font-medium text-indigo-600">{{ comment.user.username }}</span></h2>
+          <p>{{ comment.content | raw }}</p>
         </article>
       {% endfor %}
     </section>

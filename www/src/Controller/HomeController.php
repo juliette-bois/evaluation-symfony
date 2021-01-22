@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 class HomeController extends AbstractController
 {
@@ -56,30 +57,34 @@ class HomeController extends AbstractController
         ]);
     }
 
-  /**
-   * @Route("/article/{id}", name="article_show")
-   * @param Article $article
-   * @param Request $request
-   * @param EntityManagerInterface $manager
-   * @param SendEmail $mailer
-   * @return Response
-   */
-    public function showArticle(Article $article, Request $request, EntityManagerInterface $manager, SendEmail $mailer): Response
+    /**
+     * @Route("/article/{id}", name="article_show")
+     * @param Article $article
+     * @param Request $request
+     * @param Security $security
+     * @param EntityManagerInterface $manager
+     * @param SendEmail $mailer
+     * @return Response
+     */
+    public function showArticle(Article $article, Request $request, Security $security, EntityManagerInterface $manager, SendEmail $mailer): Response
     {
+        if (in_array($article->getCurrentPlace(), ['toreview', 'rejected']) && (!$security->isGranted('ROLE_ADMIN'))) {
+            $this->redirectToRoute('home');
+        }
         $comment = new Comment();
 
         $form_comment = $this->createForm(CommentType::class, $comment);
 
         $form_comment->handleRequest($request);
 
-        $submittedToken = $request->request->get('comment')['_token'];
-
-        if ($this->isCsrfTokenValid('comment_form', $submittedToken)) {
-            if ($form_comment->isSubmitted() && $form_comment->isValid()) {
+        if ($form_comment->isSubmitted() && $form_comment->isValid()) {
+            $submittedToken = $request->request->get('comment')['_token'];
+            if ($this->isCsrfTokenValid('comment_form', $submittedToken)) {
                 $comment->setCreatedAt(new \DateTime())
-                    ->setArticle($article);
+                    ->setArticle($article)
+                    ->setUser($security->getUser());
 
-                $mailer->sendConfirmMessage($comment, $article);
+                $mailer->sendCommentCreateMessage($comment, $article);
 
                 $manager->persist($comment);
                 $manager->flush();

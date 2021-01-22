@@ -19,31 +19,10 @@ class Comment
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comments")
+     * @ORM\JoinColumn(nullable=false, referencedColumnName="id")
      */
-    private $author;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\Email()
-     */
-    private $email;
-
-    /**
-     * @return mixed
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * @param mixed $email
-     */
-    public function setEmail($email): void
-    {
-        $this->email = $email;
-    }
+    private $user;
 
     /**
      * @ORM\Column(type="text")
@@ -62,19 +41,24 @@ class Comment
      */
     private $article;
 
+    /**
+     * @ORM\Column(type="string", length=255, options={"default" : "toreview"})
+     */
+    private $currentPlace = "toreview";
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getAuthor(): ?string
+    public function getUser(): ?User
     {
-        return $this->author;
+        return $this->user;
     }
 
-    public function setAuthor(string $author): self
+    public function setUser(User $user): self
     {
-        $this->author = $author;
+        $this->user = $user;
 
         return $this;
     }
@@ -111,6 +95,18 @@ class Comment
     public function setArticle(?Article $article): self
     {
         $this->article = $article;
+
+        return $this;
+    }
+
+    public function getCurrentPlace()
+    {
+        return $this->currentPlace;
+    }
+
+    public function setCurrentPlace($currentPlace)
+    {
+        $this->currentPlace = $currentPlace;
 
         return $this;
     }

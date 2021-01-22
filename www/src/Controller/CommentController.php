@@ -6,12 +6,14 @@ use App\Entity\Comment;
 use App\Form\CommentType;
 use App\Repository\CategoryRepository;
 use App\Repository\CommentRepository;
+use App\Service\SendEmail;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Workflow\WorkflowInterface;
 
 class CommentController extends AbstractController
 {
@@ -44,7 +46,7 @@ class CommentController extends AbstractController
      */
     public function updateComment(Comment $comment, Request $request, EntityManagerInterface $manager, Security $security): Response
     {
-        if ((!$security->getUser() || $security->getUser()->getUsername() !== $comment->getAuthor()) && !$this->isGranted('ROLE_ADMIN')) {
+        if ((!$security->getUser() || $security->getUser()->getId() !== $comment->getUser()->getId()) && !$this->isGranted('ROLE_ADMIN')) {
             return $this->redirectToRoute('home');
         }
 
@@ -70,6 +72,74 @@ class CommentController extends AbstractController
 
 
     /**
+     * @Route("/validate/comment", name="validate_comment")
+     * @param Request $request
+     * @param CommentRepository $commentRepository
+     * @param SendEmail $sendEmail
+     * @return Response
+     */
+    public function validateComment(Request $request, EntityManagerInterface $manager, CommentRepository $commentRepository, SendEmail $sendEmail, WorkflowInterface $articlePublishingStateMachine): Response
+    {
+        $values = json_decode($request->getContent(), true);
+
+        if (!$this->isCsrfTokenValid('validate-comment', $values['_token'])) {
+            throw $this->createAccessDeniedException('Access Denied.');
+        }
+
+        $comment = $commentRepository->find($values['id']);
+
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            throw $this->createAccessDeniedException('Access Denied.');
+        }
+
+        try {
+            $articlePublishingStateMachine->apply($comment, 'publish');
+        } catch (\Exception $exception) {
+            return new Response(false);
+        }
+        $manager->persist($comment);
+        $manager->flush();
+        $sendEmail->sendCommentConfirmMessage($comment, $comment->getArticle());
+
+        return new Response(true);
+    }
+
+
+    /**
+     * @Route("/refuse/comment", name="refuse_comment")
+     * @param Request $request
+     * @param CommentRepository $commentRepository
+     * @param SendEmail $sendEmail
+     * @return Response
+     */
+    public function refuseComment(Request $request, EntityManagerInterface $manager, CommentRepository $commentRepository, SendEmail $sendEmail, WorkflowInterface $articlePublishingStateMachine): Response
+    {
+        $values = json_decode($request->getContent(), true);
+
+        if (!$this->isCsrfTokenValid('refuse-comment', $values['_token'])) {
+            throw $this->createAccessDeniedException('Access Denied.');
+        }
+
+        $comment = $commentRepository->find($values['id']);
+
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            throw $this->createAccessDeniedException('Access Denied.');
+        }
+
+        try {
+            $articlePublishingStateMachine->apply($comment, 'reject');
+        } catch (\Exception $exception) {
+            return new Response(false);
+        }
+        $manager->persist($comment);
+        $manager->flush();
+        $sendEmail->sendCommentRefusedMessage($comment, $comment->getArticle());
+
+        return new Response(true);
+    }
+
+
+    /**
      * @Route("/delete/comment", name="delete_comment")
      * @param Request $request
      * @param Security $security
@@ -86,7 +156,7 @@ class CommentController extends AbstractController
 
         $comment = $commentRepository->find($values['id']);
 
-        if ((!$security->getUser() || $security->getUser()->getUsername() !== $comment->getAuthor()) && !$this->isGranted('ROLE_ADMIN')) {
+        if ((!$security->getUser() || $security->getUser()->getId() !== $comment->getUser()->getId()) && !$this->isGranted('ROLE_ADMIN')) {
             throw $this->createAccessDeniedException('Access Denied.');
         }
 

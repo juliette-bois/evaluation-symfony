@@ -40,11 +40,11 @@
         {% block body %}{% endblock %}
         {% block javascripts %}
         <script>
-            function validate(id, message, path, token, redirect = null) {
+            function validate(id, message, path, token, redirect = null, validate = true) {
                 const translations = {
                     'warning_message': {% trans %}message{% endtrans %}
                 }
-                if (confirm(translations.warning_message)) {
+                if (!validate || confirm(translations.warning_message)) {
                     const route = path;
                     let httpRequest = new XMLHttpRequest();
                     httpRequest.open("post", route);

@@ -6,13 +6,16 @@
     "require": {
         "php": ">=7.2.5",
         "ext-ctype": "*",
+        "ext-http": "*",
         "ext-iconv": "*",
+        "ext-json": "*",
         "composer/package-versions-deprecated": "1.11.99.1",
         "doctrine/annotations": "^1.0",
         "doctrine/doctrine-bundle": "^2.2",
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "doctrine/orm": "^2.8",
         "fzaninotto/faker": "^1.9",
+        "laminas/laminas-code": "3.4.1",
         "phpdocumentor/reflection-docblock": "^5.2",
         "sensio/framework-extra-bundle": "^5.1",
         "symfony/asset": "5.2.*",
@@ -39,12 +42,11 @@
         "symfony/twig-bundle": "5.2.*",
         "symfony/validator": "5.2.*",
         "symfony/web-link": "5.2.*",
+        "symfony/workflow": "5.2.1",
         "symfony/yaml": "5.2.*",
         "twig/extra-bundle": "^2.12|^3.0",
-        "twig/twig": "^2.12|^3.0",
-		    "ext-http": "*",
-		    "ext-json": "*"
-	},
+        "twig/twig": "^2.12|^3.0"
+    },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.4",
         "symfony/browser-kit": "^5.2",

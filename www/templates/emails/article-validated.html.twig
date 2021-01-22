@@ -36,10 +36,9 @@
 </head>
 <body>
   <section>
-    <h1>Merci d'avoir posté ce commentaire {{ author }}</h1>
-    <p>{{ author }}, vous avez posté ce commentaire le {{ createdAt | date('d/m/y') }} à {{ createdAt | date('H:i') }} pour l'article
-      <a href="http://localhost:8000/article/{{ articleId }}">{{ articleName }}</a></p>
-    <p>Votre commentaire est en attente de validation par un administrateur, vous serez prévenu une fois qu'il sera validé.</p>
+    <h1>{{ author }}, votre article <a href="http://localhost:8000/article/{{ articleId }}">{{ articleName }}</a> vient d'être validé par un administrateur.</h1>
+    <p>{{ author }}, vous avez posté cet <a href="http://localhost:8000/article/{{ articleId }}">article</a> le {{ createdAt | date('d/m/y') }} à {{ createdAt | date('H:i') }}</p>
+    <p>Vous pouvez modifier ou supprimer votre article en vous connectant à <a href="http://localhost:8000/login">votre compte</a>.</p>
     <div>
       <p>À bientôt sur <a href="http://localhost:8000/">Mon Blog</a></p>
     </div>
